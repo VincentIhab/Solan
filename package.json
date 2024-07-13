@@ -6,7 +6,7 @@
     "start": "live-server src",
     "sass": "sass src/css/main.scss src/css/styles.css --watch",
     "dev": "npm-run-all --parallel start sass",
-    "build": "parcel build src/index.html dist --public-url ./",
+    "build": "parcel build src/index.html --out-dir dist --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
