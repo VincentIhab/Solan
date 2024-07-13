@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                backgroundVideo.src = "./Images/video.mp4";
+                backgroundVideo.src = "/Images/video.mp4";
                 videoObserver.unobserve(entry.target);
             }
         });
