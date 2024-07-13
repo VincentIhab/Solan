@@ -9,6 +9,7 @@
     "build": "parcel build src/index.html --out-dir dist --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+    
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
