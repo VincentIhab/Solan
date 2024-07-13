@@ -4,17 +4,21 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server src",
-    "sass": "sass src/css/main.scss src/css/styles.css --watch",
+    "sass": "sass src/css/styles.scss dist/css/styles.css --watch",
     "dev": "npm-run-all --parallel start sass",
     "build": "parcel build src/index.html --out-dir dist --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "gh-pages": "^3.1.0",
     "live-server": "^1.2.1",
     "npm-run-all": "^4.1.5",
-    "parcel": "^2.0.0",
     "sass": "^1.32.8",
-    "gh-pages": "^3.1.0"
+    "stylelint": "^16.7.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-scss": "^6.4.1"
   }
+
 }

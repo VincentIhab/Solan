@@ -1,12 +1,15 @@
+// Import abstracts
 @import "abstracts/functions";
 @import "abstracts/mixins";
 @import "abstracts/variables";
 
+// Import base styles
 @import "base/animations";
 @import "base/base";
 @import "base/typography";
 @import "base/utilities";
 
+// Import components
 @import "components/bg-video";
 @import "components/button";
 @import "components/card";
@@ -16,8 +19,10 @@
 @import "components/popup";
 @import "components/story";
 
+// Import layout
 @import "layout/footer";
 @import "layout/header";
 @import "layout/navigation";
 
+// Import pages
 @import "pages/home";

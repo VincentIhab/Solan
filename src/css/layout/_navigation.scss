@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
   position: fixed;
   left: 0;
@@ -12,19 +11,21 @@
 
   &__logo-container {
     display: flex;
-    align-content: center;
-    align-self: center;
+    align-items: center;
     cursor: pointer;
     transition: opacity 0.1s ease-in;
+
     &:hover,
     &:active {
       opacity: 0.7;
     }
   }
+
   &__logo {
     width: 5.51rem;
     margin-right: 2.1rem;
   }
+
   &__logo-text {
     width: 8.298rem;
   }
@@ -34,28 +35,29 @@
   background-color: var(--color-primary-3);
 }
 
+
 @include respond(mid-desktop) {
   .navigation__checkbox {
     display: none;
   }
+
   .navigation__button_mobile {
     display: none;
   }
+
   .navigation__background {
     display: none;
   }
 
   .navigation {
     z-index: 1;
-
     padding: 5rem 10rem;
 
-    li:not(li:last-child) {
+    li:not(:last-child) {
       margin-right: 4rem;
     }
 
     &__links {
-      align-self: center;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,11 +70,10 @@
         position: relative;
         font-size: 1.6rem;
         text-transform: uppercase;
-        align-self: center;
         color: var(--color-gray);
         font-weight: 400;
         padding: 0.2rem 2rem;
-        transition: transform ease-in-out 0.2s, color .3s ease-in;
+        transition: transform ease-in-out 0.2s, color 0.3s ease-in;
       }
 
       &:hover,
@@ -89,10 +90,10 @@
     }
   }
 }
-
 @include respond(tab-land) {
   .navigation {
     z-index: 100;
+
     &__logo-container {
       margin: 3rem 0 0 0;
     }
@@ -104,6 +105,7 @@
       @include respond(tab-port) {
         margin-left: 3.5rem;
       }
+
       @include respond(phone) {
         margin-left: 2.5rem;
       }
@@ -128,7 +130,6 @@
       z-index: 2000;
       box-shadow: 0 1rem 3rem var(--shadow-light);
       text-align: center;
-      cursor: pointer;
 
       @include respond(tab-port) {
         top: 3rem;
@@ -184,7 +185,6 @@
       left: 0;
       z-index: 1500;
       visibility: hidden;
-
       opacity: 0;
       width: 100%;
       transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -236,6 +236,7 @@
         color: var(--color-primary-2);
         transform: translateX(1rem);
       }
+
       &:last-child {
         margin-bottom: 1em;
       }
@@ -245,12 +246,12 @@
     &__checkbox:checked ~ &__background {
       transform: scale(80);
     }
+
     &__checkbox:checked ~ &__nav {
       opacity: 1;
       visibility: visible;
-
     }
- 
+
     //ICON
     &__icon {
       position: relative;
@@ -276,6 +277,7 @@
       &::before {
         top: -0.8rem;
       }
+
       &::after {
         top: 0.8rem;
       }
