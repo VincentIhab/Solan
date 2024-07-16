@@ -591,32 +591,83 @@ document.addEventListener("DOMContentLoaded", function() {
     const backgroundVideo = document.getElementById("background-video");
     const navigationButton = document.querySelector(".navigation__button");
     const navbar = document.getElementById("navbar");
-    const newParent = document.getElementById("header_contianer");
+    const newParent = document.getElementById("header_container");
     const oldParent = document.getElementById("header");
     const scrollThreshold = 100; // The scroll level to trigger the background change
     let videoLoaded = false;
-    let mobileVideoLoaded = false;
-    let desktopVideoLoaded = false;
     let currentVideo = "";
-    // Load the videos in memory
-    const mobileVideo = document.createElement("video");
-    mobileVideo.src = "mobile-Land-video.webm";
-    mobileVideo.preload = "auto";
-    mobileVideo.onloadeddata = ()=>{
-        mobileVideoLoaded = true;
+    const mobileVideoSrc = "mobile-Land-video.webm";
+    const desktopVideoSrc = "video.mp4";
+    // Function to load and play the video with retries
+    const loadAndPlayVideo = (videoElement, retries = 3, delay = 2000)=>{
+        const tryPlay = (attemptsLeft)=>{
+            videoElement.load();
+            videoElement.play().then(()=>{
+                videoLoadSuccess();
+            }).catch((e)=>{
+                console.error("Autoplay prevented:", e);
+                if (attemptsLeft > 1) {
+                    console.log(`Retrying to play video. Attempts left: ${attemptsLeft - 1}`);
+                    setTimeout(()=>tryPlay(attemptsLeft - 1), delay);
+                } else videoLoadError(e);
+            });
+        };
+        tryPlay(retries);
     };
-    mobileVideo.onerror = (e)=>{
-        console.error("Failed to preload mobile video", e);
+    // Video load success function
+    const videoLoadSuccess = ()=>{
+        videoLoaded = true;
+        spinnerContainer.classList.add("hidden");
+        videoContainer.style.display = "block";
+        imageContainer.style.display = "none";
     };
-    const desktopVideo = document.createElement("video");
-    desktopVideo.src = "video.mp4";
-    desktopVideo.preload = "auto";
-    desktopVideo.onloadeddata = ()=>{
-        desktopVideoLoaded = true;
+    // Video load error function
+    const videoLoadError = (e)=>{
+        console.error("Video failed to load", e);
+        spinnerContainer.classList.add("hidden");
+        videoContainer.style.display = "none";
+        imageContainer.style.display = "block";
     };
-    desktopVideo.onerror = (e)=>{
-        console.error("Failed to preload desktop video", e);
+    // Select and load the appropriate video based on screen size
+    const selectVideo = ()=>{
+        const videoElement = backgroundVideo;
+        if (window.innerWidth <= 767 && currentVideo !== "mobile") {
+            console.log("Selecting mobile video");
+            videoElement.src = mobileVideoSrc;
+            videoElement.type = "video/webm";
+            videoContainer.classList.remove("bg-video--desktop");
+            videoElement.classList.remove("bg-video--desktop__content_desk");
+            videoContainer.classList.add("bg-video--mobile");
+            videoElement.classList.add("bg-video--mobile__content_mobile");
+            if (oldParent) oldParent.insertBefore(videoContainer, oldParent.firstChild);
+            currentVideo = "mobile";
+        } else if (window.innerWidth > 767 && currentVideo !== "desktop") {
+            console.log("Selecting desktop video");
+            videoElement.src = desktopVideoSrc;
+            videoElement.type = "video/mp4";
+            videoContainer.classList.remove("bg-video--mobile");
+            videoElement.classList.remove("bg-video--mobile__content_mobile");
+            videoContainer.classList.add("bg-video--desktop");
+            videoElement.classList.add("bg-video--desktop__content_desk");
+            if (newParent) newParent.insertBefore(videoContainer, newParent.firstChild);
+            currentVideo = "desktop";
+        }
+        videoElement.onloadeddata = videoLoadSuccess;
+        videoElement.onerror = videoLoadError;
+        loadAndPlayVideo(videoElement);
     };
+    // Timeout to handle video load failure
+    setTimeout(()=>{
+        if (!videoLoaded) {
+            console.warn("Video load timeout reached");
+            spinnerContainer.classList.add("hidden");
+            videoContainer.style.display = "none";
+            imageContainer.style.display = "block";
+        }
+    }, 12000); // 12 seconds timeout
+    selectVideo();
+    // Listen for window resize events to change the video
+    window.addEventListener("resize", selectVideo);
     // Handle scroll changes for the navbar
     const handleScroll = ()=>{
         if (window.scrollY > scrollThreshold) {
@@ -637,58 +688,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
     let scrolling = false;
-    // Video load success function
-    const videoLoadSuccess = ()=>{
-        videoLoaded = true;
-        spinnerContainer.classList.add("hidden");
-        videoContainer.style.display = "block";
-        imageContainer.style.display = "none";
-        handleScroll();
-    };
-    // Video load error function
-    const videoLoadError = (e)=>{
-        console.error("Video failed to load", e);
-        spinnerContainer.classList.add("hidden");
-        videoContainer.style.display = "none";
-        imageContainer.style.display = "block";
-        handleScroll();
-    };
-    // Select and load the appropriate video based on screen size
-    const selectVideo = ()=>{
-        const videoElement = backgroundVideo;
-        if (window.innerWidth <= 768 && currentVideo !== "mobile") {
-            videoElement.src = mobileVideo.src;
-            videoContainer.classList.remove("bg-video--desktop");
-            videoElement.classList.remove("bg-video--desktop__content_desk");
-            videoContainer.classList.add("bg-video--mobile");
-            videoElement.classList.add("bg-video--mobile__content_mobile");
-            oldParent.insertBefore(videoContainer, oldParent.firstChild);
-            currentVideo = "mobile";
-        } else if (window.innerWidth > 768 && currentVideo !== "desktop") {
-            videoElement.src = desktopVideo.src;
-            videoContainer.classList.remove("bg-video--mobile");
-            videoElement.classList.remove("bg-video--mobile__content_mobile");
-            videoContainer.classList.add("bg-video--desktop");
-            videoElement.classList.add("bg-video--desktop__content_desk");
-            newParent.insertBefore(videoContainer, newParent.firstChild);
-            currentVideo = "desktop";
-        }
-        videoElement.onloadeddata = videoLoadSuccess;
-        videoElement.onerror = videoLoadError;
-    };
-    // Timeout to handle video load failure
-    setTimeout(()=>{
-        if (!videoLoaded) {
-            console.warn("Video load timeout reached");
-            spinnerContainer.classList.add("hidden");
-            videoContainer.style.display = "none";
-            imageContainer.style.display = "block";
-            handleScroll();
-        }
-    }, 12000); // 12 seconds timeout
-    selectVideo();
-    // Listen for window resize events to change the video
-    window.addEventListener("resize", selectVideo);
     // Throttle the scroll event listener
     let isScrolling;
     window.addEventListener("scroll", ()=>{
