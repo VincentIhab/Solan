@@ -585,9 +585,9 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"bnLOQ":[function(require,module,exports) {
 document.addEventListener("DOMContentLoaded", function() {
+    const loadingBar = document.getElementById("loading-bar");
     const spinnerContainer = document.getElementById("spinner-container");
     const videoContainer = document.getElementById("video-container");
-    const imageContainer = document.getElementById("image-container");
     const backgroundVideo = document.getElementById("background-video");
     const navigationButton = document.querySelector(".navigation__button");
     const navbar = document.getElementById("navbar");
@@ -598,40 +598,34 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentVideo = "";
     const mobileVideoSrc = "mobile-Land-video.webm";
     const desktopVideoSrc = "video.mp4";
-    // Function to load and play the video with retries
-    const loadAndPlayVideo = (videoElement, retries = 3, delay = 2000)=>{
-        const tryPlay = (attemptsLeft)=>{
-            videoElement.load();
-            videoElement.play().then(()=>{
-                videoLoadSuccess();
-            }).catch((e)=>{
-                console.error("Autoplay prevented:", e);
-                if (attemptsLeft > 1) {
-                    console.log(`Retrying to play video. Attempts left: ${attemptsLeft - 1}`);
-                    setTimeout(()=>tryPlay(attemptsLeft - 1), delay);
-                } else videoLoadError(e);
-            });
-        };
-        tryPlay(retries);
-    };
+    let interval = setInterval(()=>{
+        const images = document.images;
+        let loadedImages = 0;
+        for(let i = 0; i < images.length; i++)if (images[i].complete) loadedImages++;
+        let progress = Math.floor(loadedImages / images.length * 100);
+        // Update loading bar width and color
+        loadingBar.style.width = progress + "%";
+        loadingBar.style.backgroundColor = `rgb(${255 - progress * 2.55}, ${255 - progress * 2.55}, ${255 - progress * 2.55})`;
+        if (progress === 100) {
+            clearInterval(interval);
+            loadingBar.style.width = "100%";
+            loadingBar.style.backgroundColor = "black";
+        }
+    }, 100);
     // Video load success function
     const videoLoadSuccess = ()=>{
         videoLoaded = true;
         spinnerContainer.classList.add("hidden");
         videoContainer.style.display = "block";
-        imageContainer.style.display = "none";
     };
     // Video load error function
     const videoLoadError = (e)=>{
-        console.error("Video failed to load", e);
-        spinnerContainer.classList.add("hidden");
-        videoContainer.style.display = "none";
-        imageContainer.style.display = "block";
+        selectVideo();
     };
     // Select and load the appropriate video based on screen size
     const selectVideo = ()=>{
         const videoElement = backgroundVideo;
-        if (window.innerWidth <= 767 && currentVideo !== "mobile") {
+        if (window.innerWidth <= 768 && currentVideo !== "mobile") {
             console.log("Selecting mobile video");
             videoElement.src = mobileVideoSrc;
             videoElement.type = "video/webm";
@@ -639,9 +633,10 @@ document.addEventListener("DOMContentLoaded", function() {
             videoElement.classList.remove("bg-video--desktop__content_desk");
             videoContainer.classList.add("bg-video--mobile");
             videoElement.classList.add("bg-video--mobile__content_mobile");
-            if (oldParent) oldParent.insertBefore(videoContainer, oldParent.firstChild);
+            videoElement.loop = false;
+            oldParent.insertBefore(videoContainer, oldParent.firstChild);
             currentVideo = "mobile";
-        } else if (window.innerWidth > 767 && currentVideo !== "desktop") {
+        } else if (window.innerWidth > 768 && currentVideo !== "desktop") {
             console.log("Selecting desktop video");
             videoElement.src = desktopVideoSrc;
             videoElement.type = "video/mp4";
@@ -649,22 +644,13 @@ document.addEventListener("DOMContentLoaded", function() {
             videoElement.classList.remove("bg-video--mobile__content_mobile");
             videoContainer.classList.add("bg-video--desktop");
             videoElement.classList.add("bg-video--desktop__content_desk");
-            if (newParent) newParent.insertBefore(videoContainer, newParent.firstChild);
+            newParent.insertBefore(videoContainer, newParent.firstChild);
             currentVideo = "desktop";
         }
         videoElement.onloadeddata = videoLoadSuccess;
         videoElement.onerror = videoLoadError;
-        loadAndPlayVideo(videoElement);
     };
     // Timeout to handle video load failure
-    setTimeout(()=>{
-        if (!videoLoaded) {
-            console.warn("Video load timeout reached");
-            spinnerContainer.classList.add("hidden");
-            videoContainer.style.display = "none";
-            imageContainer.style.display = "block";
-        }
-    }, 12000); // 12 seconds timeout
     selectVideo();
     // Listen for window resize events to change the video
     window.addEventListener("resize", selectVideo);
