@@ -596,7 +596,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollThreshold = 100; // The scroll level to trigger the background change
     let videoLoaded = false;
     let currentVideo = "";
-    const mobileVideoSrc = "mobile-Land-video.webm";
+    const mobileVideoSrc = "mobile-Land-video.mp4";
     const desktopVideoSrc = "video.mp4";
     let interval = setInterval(()=>{
         const images = document.images;
@@ -628,7 +628,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (window.innerWidth <= 768 && currentVideo !== "mobile") {
             console.log("Selecting mobile video");
             videoElement.src = mobileVideoSrc;
-            videoElement.type = "video/webm";
+            videoElement.type = "video/mp4";
             videoContainer.classList.remove("bg-video--desktop");
             videoElement.classList.remove("bg-video--desktop__content_desk");
             videoContainer.classList.add("bg-video--mobile");
