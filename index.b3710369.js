@@ -679,13 +679,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         handleScroll() {
-            if (window.scrollY > this.scrollThreshold) {
-                this.navbar.classList.add("scrolled");
-                this.navigationButton.classList.add("btn-darkin");
-            } else {
-                this.navbar.classList.remove("scrolled");
-                this.navigationButton.classList.remove("btn-darkin");
-            }
+            if (window.scrollY > this.scrollThreshold) this.navbar.classList.add("scrolled");
+            else this.navbar.classList.remove("scrolled");
         }
         createIntersectionObserver() {
             const observer = new IntersectionObserver(this.animateElement.bind(this), {

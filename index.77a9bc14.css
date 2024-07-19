@@ -517,14 +517,14 @@ body {
 }
 
 #navVideo_show-on-section-2 {
-  opacity: .5;
+  opacity: .8;
   z-index: 100;
   width: 20rem;
   transition: transform 1s;
   position: absolute;
-  bottom: 0;
-  left: -2rem;
-  transform: translateY(100%);
+  bottom: -10rem;
+  left: 50%;
+  transform: translate(-50%, -50%)rotate(180deg);
 }
 
 #navVideo {
@@ -733,7 +733,7 @@ body {
 }
 
 .target.animate-box4 {
-  animation: 1s forwards fadeInTop;
+  animation: 1s .3s forwards fadeInTop;
 }
 
 .box1:hover .container-rarr, .box2:hover .container-rarr {
@@ -852,7 +852,7 @@ body {
   }
 
   .target.animate-box2 {
-    zoom: 85%;
+    zoom: 92.2%;
   }
 }
 
@@ -1190,12 +1190,15 @@ body {
   }
 
   .navigation li:not(:last-child) {
-    margin-right: 4rem;
+    margin-right: 2rem;
   }
 
   .navigation__links {
+    background-color: #0000;
+    border-radius: 50px;
     justify-content: space-between;
     align-items: center;
+    transition: background-color .2s;
     display: flex;
   }
 
@@ -1203,8 +1206,8 @@ body {
     text-transform: uppercase;
     color: var(--color-gray);
     padding: 0 2rem;
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 1.4rem;
+    font-weight: 600;
     transition: color .3s ease-in;
     display: inline-block;
     position: relative;
@@ -1222,39 +1225,36 @@ body {
 }
 
 .scrolled {
-  border-bottom: 1.5px solid var(--color-gray);
   z-index: 9999;
-  background-color: #ffffffe7;
-  padding: 1.5rem 10rem;
+  background-color: #0000;
+  padding: 2rem 10rem;
 }
 
-.scrolled .navigation__link {
+.scrolled .navigation__links {
   color: var(--color-primary-4);
+  backdrop-filter: blur(50px);
+  box-sizing: content-box;
+  background-color: #282828a3;
+  padding: 10px 20px;
 }
 
-.scrolled .navigation__link:hover, .scrolled .navigation__link:active {
-  color: var(--color-primary);
+.scrolled .navigation__link:link, .scrolled .navigation__link:visited {
+  border-radius: 50px;
+  padding: .5rem 2rem;
 }
 
 .scrolled .navigation__link__active {
-  color: var(--color-primary) !important;
-}
-
-.scrolled .navigation__logo-container {
-  position: relative;
+  background-color: #f0f8ff;
+  color: inherit !important;
 }
 
 .scrolled .navigation__logo-container:before {
-  content: "EST.";
-  color: var(--color-primary);
-  font-size: 1.1rem;
-  position: absolute;
-  bottom: -2px;
-  right: 0;
+  content: "";
+  font-size: 0;
 }
 
 .scrolled .navigation__logo-container {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132.979' height='22.518' viewBox='0 0 132.979 22.518'%3E%3Cpath id='Union_1' data-name='Union 1' d='M0,22.518V17.7H17.064V13.107H0V7.991L6.661,0h22.4V5.327H11.727l-3.3,3.3H29.059V15.14l-6.681,7.378Zm59.493-.032V0H66.67V16.94h9.763L71.9,22.486Zm-9.625-.036H31.023V8.834L38.4,0H57.533V13.3L49.869,22.45ZM39.047,15.98H49.509V6.469H39.047Zm85.658,6.3V5.325l-4.946.293-4.134,5.15v11.51h-7.533V.257h7.533V5.026L119.759.257h13.22v22.02Zm-18.578,0H74.034L86.306,8.309H99.562V5.116H88.383L92.96.128h13.168V22.277h0ZM85.174,16.8H97.118V12.7H89.281Z' fill='%2327343d'/%3E%3C/svg%3E%0A");
+  background-image: none;
 }
 
 @media only screen and (width <= 80.5em) {
