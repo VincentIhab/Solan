@@ -594,6 +594,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.navVideo = document.getElementById("navVideo");
             this.navigationButton = document.querySelector(".navigation__button");
             this.navbar = document.getElementById("navbar");
+            this.navBtn = document.getElementById("btn-desk");
             this.newParent = document.getElementById("header_container");
             this.oldParent = document.getElementById("header");
             this.box2 = document.querySelector(".box2");
@@ -679,8 +680,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         handleScroll() {
-            if (window.scrollY > this.scrollThreshold) this.navbar.classList.add("scrolled");
-            else this.navbar.classList.remove("scrolled");
+            if (window.scrollY > this.scrollThreshold) {
+                this.navbar.classList.add("scrolled");
+                this.navBtn.classList.replace("btn-light", "btn-dark");
+            } else {
+                this.navbar.classList.remove("scrolled");
+                this.navBtn.classList.replace("btn-dark", "btn-light");
+            }
         }
         createIntersectionObserver() {
             const observer = new IntersectionObserver(this.animateElement.bind(this), {
@@ -833,11 +839,6 @@ document.addEventListener("DOMContentLoaded", function() {
     new PageHandler();
 });
 document.addEventListener("DOMContentLoaded", ()=>{
-    const header = document.getElementById("header_container");
-    // Show the header with padding animation
-    header.classList.add("expanded");
-});
-document.addEventListener("DOMContentLoaded", ()=>{
     const solutionsItem = document.querySelector(".Solutions");
     const dropdownMenu = solutionsItem.querySelector(".dropdown-menu");
     const overlay = document.getElementById("overlay");
@@ -850,14 +851,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
         overlay.style.visibility = "visible";
         solutionslink.style.color = "#fff";
         solutionslinkarrow.style.fill = "#fff";
-        navigation.classList.add("onhoveronsolutions");
+    // on hold for add a overlay for the navigation
+    // navigation.classList.add('onhoveronsolutions')
     });
     solutionsItem.addEventListener("mouseleave", ()=>{
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
         solutionslink.style.color = "inherit";
         solutionslinkarrow.style.fill = "#000";
-        navigation.classList.remove("onhoveronsolutions");
+    // on hold for add a overlay for the navigation
+    // navigation.classList.remove('onhoveronsolutions')
     });
     dropdownItem.forEach((el)=>{
         el.addEventListener("mouseenter", ()=>{
