@@ -3,15 +3,25 @@ const items = Array.from(document.querySelectorAll(".carousel-item"));
 const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
 const tracker = document.querySelector(".carousel-tracker__tracker");
+const withAnimations = document.querySelector(".with-animations");
 const totalItems = items.length;
 let currentIndex = 0;
-function updateCarousel() {
-    // Remove active class from all items
+let startX = 0;
+let endX = 0;
+let isDragging = false;
+function updateCarousel(direction) {
+    // Remove active and direction classes from all items
     items.forEach((item)=>{
-        item.classList.remove("active");
+        item.classList.remove("active", "come-from-right", "come-from-left", "come-from-right-prev", "come-from-left-prev");
     });
-    // Add active class to the first visible item
-    items[0].classList.add("active");
+    // Add active and direction class to the first visible item
+    if (direction === "next") {
+        items[0].classList.add("active", "come-from-right");
+        items[items.length - 1].classList.add("come-from-right-prev");
+    } else if (direction === "prev") {
+        items[0].classList.add("active", "come-from-left");
+        items[1].classList.add("come-from-left-prev");
+    } else items[0].classList.add("active");
     updateTracker();
 }
 function updateTracker() {
@@ -26,7 +36,7 @@ function next() {
     items.forEach((item)=>{
         carousel.appendChild(item);
     });
-    updateCarousel(); // Update the active class
+    updateCarousel("next"); // Update the active class with direction
 }
 function prev() {
     currentIndex = (currentIndex - 1 + totalItems) % totalItems;
@@ -36,11 +46,60 @@ function prev() {
     items.forEach((item)=>{
         carousel.appendChild(item);
     });
-    updateCarousel(); // Update the active class
+    updateCarousel("prev"); // Update the active class with direction
 }
 prevButton.addEventListener("click", prev);
 nextButton.addEventListener("click", next);
 // Initial setup
 updateCarousel();
+// Touch event handlers
+carousel.addEventListener("touchstart", handleTouchStart, false);
+carousel.addEventListener("touchmove", handleTouchMove, false);
+carousel.addEventListener("touchend", handleTouchEnd, false);
+function handleTouchStart(event) {
+    startX = event.touches[0].clientX;
+}
+function handleTouchMove(event) {
+    endX = event.touches[0].clientX;
+}
+function handleTouchEnd() {
+    const deltaX = startX - endX;
+    if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) next();
+        else prev();
+    }
+}
+// Mouse event handlers for desktop
+carousel.addEventListener("mousedown", handleMouseDown, false);
+carousel.addEventListener("mousemove", handleMouseMove, false);
+carousel.addEventListener("mouseup", handleMouseUp, false);
+carousel.addEventListener("mouseleave", handleMouseLeave, false);
+function handleMouseDown(event) {
+    isDragging = true;
+    startX = event.clientX;
+}
+function handleMouseMove(event) {
+    if (isDragging) endX = event.clientX;
+}
+function handleMouseUp() {
+    if (isDragging) handleDragEnd();
+}
+function handleMouseLeave() {
+    if (isDragging) handleDragEnd();
+}
+function handleDragEnd() {
+    isDragging = false;
+    const deltaX = startX - endX;
+    if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) next();
+        else prev();
+    }
+}
+withAnimations.addEventListener("click", (e)=>{
+    e.preventDefault();
+    if (withAnimations.textContent === "with animations") withAnimations.textContent = "without animtions";
+    else withAnimations.textContent = "with animations";
+    carousel.classList.toggle("animated");
+});
 
 //# sourceMappingURL=index.8e962d96.js.map
