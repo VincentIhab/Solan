@@ -2,61 +2,45 @@ const carousel = document.querySelector(".carousel");
 const items = Array.from(document.querySelectorAll(".carousel-item"));
 const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
-let lastActiveItem = items[0]; // Keep track of the last active item
+const tracker = document.querySelector(".carousel-tracker__tracker");
+const totalItems = items.length;
+let currentIndex = 0;
 function updateCarousel() {
-    const isMobile = window.innerWidth <= 768;
-    items.forEach((item, index)=>{
-        item.classList.remove("active", "prev", "next");
-        if (isMobile) {
-            if (index === Math.floor(items.length / 2)) {
-                item.classList.add("active");
-                lastActiveItem = item; // Update the last active item
-            }
-        } else {
-            if (index === 0) {
-                item.classList.add("active");
-                lastActiveItem = item; // Update the last active item
-            } else if (index === 1) item.classList.add("next");
-            else if (index === items.length - 1) item.classList.add("prev");
-        }
+    // Remove active class from all items
+    items.forEach((item)=>{
+        item.classList.remove("active");
     });
+    // Add active class to the first visible item
+    items[0].classList.add("active");
+    updateTracker();
+}
+function updateTracker() {
+    const percentage = (currentIndex + 1) / totalItems * 100; // Calculate the percentage
+    tracker.style.width = `${percentage}%`;
 }
 function next() {
-    const firstItem = items.shift();
-    items.push(firstItem);
-    updateCarousel();
-    // Trigger reflow for animation
-    carousel.offsetWidth;
-    carousel.classList.add("transition-next");
-    setTimeout(()=>{
-        carousel.classList.remove("transition-next");
-    }, 1000); // Should match the transition duration in CSS
+    currentIndex = (currentIndex + 1) % totalItems;
+    const firstItem = items.shift(); // Remove the first item from the array
+    items.push(firstItem); // Add it to the end of the array
+    // Reorder the DOM elements to match the array order
+    items.forEach((item)=>{
+        carousel.appendChild(item);
+    });
+    updateCarousel(); // Update the active class
 }
 function prev() {
-    const lastItem = items.pop();
-    items.unshift(lastItem);
-    updateCarousel();
-    // Trigger reflow for animation
-    carousel.offsetWidth;
-    carousel.classList.add("transition-prev");
-    setTimeout(()=>{
-        carousel.classList.remove("transition-prev");
-    }, 1000); // Should match the transition duration in CSS
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+    const lastItem = items.pop(); // Remove the last item from the array
+    items.unshift(lastItem); // Add it to the beginning of the array
+    // Reorder the DOM elements to match the array order
+    items.forEach((item)=>{
+        carousel.appendChild(item);
+    });
+    updateCarousel(); // Update the active class
 }
-function handleMouseEnter(event) {
-    if (window.innerWidth > 768) {
-        items.forEach((item)=>item.classList.remove("active"));
-        event.currentTarget.classList.add("active");
-    }
-}
-items.forEach((item)=>{
-    item.addEventListener("mouseenter", handleMouseEnter);
-});
 prevButton.addEventListener("click", prev);
 nextButton.addEventListener("click", next);
 // Initial setup
 updateCarousel();
-// Handle window resize to update carousel layout
-window.addEventListener("resize", updateCarousel);
 
 //# sourceMappingURL=index.8e962d96.js.map

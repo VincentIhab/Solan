@@ -651,27 +651,30 @@ body {
 
 .solutions-Section {
   background-color: #f7f7f7;
-  height: 100vh;
+  margin-top: 15rem;
   padding: 0 15rem;
-  position: relative;
-  top: 10rem;
+}
+
+.solutions-Section-dec {
+  margin: 5rem 0 10rem !important;
 }
 
 .carousel-container {
-  width: 100%;
   height: 100vh;
   position: relative;
   overflow: visible;
+}
+
+.carousel-container-dec {
+  margin: 4rem;
 }
 
 .carousel {
   background-color: #f7f7f7;
   align-content: flex-start;
   align-items: center;
-  gap: 2rem;
-  width: 100%;
-  height: 50vh;
-  margin-top: 12.8rem;
+  gap: 2.5rem;
+  width: 200%;
   transition: all .5s;
   display: flex;
   overflow: visible;
@@ -680,14 +683,20 @@ body {
 .carousel-item {
   box-sizing: border-box;
   opacity: .99;
-  background-color: #dbdbdb00;
+  background-color: #e2e2e2;
   border-radius: 25px;
-  width: 27.5rem;
-  height: 35rem;
+  width: 37.5rem;
+  height: 68rem;
   transition: all .2s;
   position: relative;
   overflow: hidden;
   box-shadow: 0 2rem 5rem #00000021;
+}
+
+.carousel-item__image-con {
+  width: 100%;
+  height: 50%;
+  display: block;
 }
 
 .carousel-item img {
@@ -695,35 +704,21 @@ body {
   z-index: -1;
   width: 100%;
   height: 100%;
-  position: absolute;
   overflow: hidden;
 }
 
-.carousel-item:after {
-  content: "";
-  z-index: -1;
-  background: linear-gradient(0deg, #000 0%, #0000008d 4%);
-  width: 100%;
-  height: 100%;
-  transition: all .3s;
-  position: absolute;
-  top: 0;
-}
-
 .carousel-item h3 {
-  color: #d6d6d6c4;
-  margin: 1.2rem 2.3rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
   font-size: 2.4rem;
   transition: all .3s;
-  position: absolute;
-  bottom: 0;
 }
 
 .carousel-item p {
-  opacity: 0;
-  margin: 1.2rem 3.5rem;
+  color: var(--color-primary);
   font-size: 1.6rem;
   font-weight: 500;
+  line-height: 2;
   transition: all .3s;
 }
 
@@ -737,19 +732,17 @@ body {
   font-size: 1.5rem;
   transition: all .3s 10ms;
   position: absolute;
-  bottom: 2rem;
-  left: 3rem;
+  bottom: 5rem;
 }
 
 .carousel-item.active {
   opacity: 1;
   z-index: 80;
-  width: 52.5rem;
-  height: 50rem;
+  background-color: #000;
+  width: 75rem;
 }
 
 .carousel-item.active p {
-  opacity: 1;
   color: #ffffffeb;
 }
 
@@ -757,10 +750,6 @@ body {
   color: #ffffffeb;
   font-size: 4rem;
   position: relative;
-}
-
-.carousel-item.active:after {
-  background: linear-gradient(0deg, #000 0%, #000000d4 4%);
 }
 
 .carousel-item.active .sol-btn-go {
@@ -775,10 +764,12 @@ body {
 }
 
 .controls {
+  align-items: center;
+  width: 100%;
   display: flex;
   position: absolute;
-  top: 60%;
-  right: 40px;
+  bottom: 12.5%;
+  right: 0;
   transform: translateY(-50%);
 }
 
@@ -789,9 +780,31 @@ body {
   border-radius: 100px;
   width: 42.5px;
   height: 42.5px;
-  margin: 5px 8px;
   font-size: 2rem;
   transition: all .2s;
+}
+
+.carousel-tracker {
+  width: 100%;
+  margin-right: 5rem;
+  position: relative;
+}
+
+.carousel-tracker__back {
+  z-index: 1;
+  background-color: #e2e2e2;
+  width: 100%;
+  height: 3px;
+  position: absolute;
+}
+
+.carousel-tracker__tracker {
+  z-index: 2;
+  background-color: #27343d;
+  width: 10%;
+  height: 3px;
+  transition: all .5s;
+  position: absolute;
 }
 
 .controls button:hover {
@@ -804,6 +817,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 36%;
+  margin-right: 20px;
 }
 
 #prev:hover {
@@ -1057,6 +1071,8 @@ body {
 
 .products-dec {
   margin: 5rem 15rem 3rem;
+  position: relative;
+  top: 7rem;
 }
 
 .dec {
@@ -1064,8 +1080,6 @@ body {
   align-content: flex-end;
   align-items: center;
   display: flex;
-  position: relative;
-  top: 7rem;
 }
 
 .dec h1 {
