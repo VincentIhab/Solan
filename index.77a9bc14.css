@@ -851,15 +851,15 @@ body {
   }
 
   .animated .carousel-item.active p {
-    animation: .5s 1.5s forwards fadeInTop;
+    animation: .6s 1.23s forwards FadeIn;
   }
 
   .animated .carousel-item.active h3 {
-    animation: .5s 1.2s forwards fadeInTop;
+    animation: .5s .7s forwards fadeInBottom;
   }
 
   .animated .come-from-right {
-    animation: 1s forwards fadeInRight5, 1s forwards expandwid;
+    animation: .5s forwards fadeInRight5, 1.3s forwards expandwid;
     transform: translateX(125%);
   }
 
@@ -880,11 +880,13 @@ body {
 
   @keyframes fadeInLeft5 {
     from {
-      transform: translateX(-125%);
+      filter: blur(5px);
+      transform: scale(.8)translateX(-125%);
     }
 
     to {
-      transform: translateX(0);
+      filter: blur();
+      transform: scale(1)translateX(0);
     }
   }
 
@@ -905,7 +907,7 @@ body {
     z-index: 1;
     background-color: #282828;
     width: 75rem;
-    animation: .5s forwards right-prev;
+    animation: .8s forwards right-prev;
     position: absolute;
     left: 0;
   }
@@ -913,7 +915,6 @@ body {
   @keyframes right-prev {
     from {
       filter: blur();
-      opacity: 1;
       background-color: #282828;
       width: 75rem;
       left: 0;
@@ -921,12 +922,11 @@ body {
     }
 
     to {
-      opacity: 0;
       filter: blur(5px);
       background-color: #e2e2e2;
       width: 37.5rem;
-      left: -18%;
-      transform: scale(.5);
+      left: -24%;
+      transform: scale(.8);
     }
   }
 }
