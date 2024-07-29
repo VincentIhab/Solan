@@ -1,105 +1,88 @@
-const carousel = document.querySelector(".carousel");
-const items = Array.from(document.querySelectorAll(".carousel-item"));
-const prevButton = document.getElementById("prev");
-const nextButton = document.getElementById("next");
-const tracker = document.querySelector(".carousel-tracker__tracker");
-const withAnimations = document.querySelector(".with-animations");
-const totalItems = items.length;
-let currentIndex = 0;
-let startX = 0;
-let endX = 0;
-let isDragging = false;
-function updateCarousel(direction) {
-    // Remove active and direction classes from all items
-    items.forEach((item)=>{
-        item.classList.remove("active", "come-from-right", "come-from-left", "come-from-right-prev", "come-from-left-prev");
+document.addEventListener("DOMContentLoaded", ()=>{
+    const solutionsSection = document.getElementById("solutions-section");
+    const body = document.body;
+    let isScrollingHorizontally = false;
+    let enteringFromBottom = false;
+    let horizontalOffset = 0;
+    const horizontalSpeedFactor = 0.8; // Adjust speed factor as needed for acceleration
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+            if (entry.isIntersecting) {
+                if (entry.boundingClientRect.top < 0) {
+                    enteringFromBottom = true;
+                    solutionsSection.scrollLeft = solutionsSection.scrollWidth - solutionsSection.clientWidth;
+                } else enteringFromBottom = false;
+                // Center the solutionsSection vertically
+                const scrollToCenter = solutionsSection.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2 - solutionsSection.clientHeight / 2);
+                window.scrollTo({
+                    top: scrollToCenter,
+                    behavior: "smooth"
+                });
+                isScrollingHorizontally = true;
+                body.style.overflowY = "hidden";
+                window.addEventListener("wheel", handleHorizontalScroll, {
+                    passive: false
+                });
+            } else {
+                if (enteringFromBottom && solutionsSection.scrollLeft === 0) {
+                    // Allow vertical scroll after reaching the start when entering from the bottom
+                    body.style.overflowY = "auto";
+                    isScrollingHorizontally = false;
+                } else if (!enteringFromBottom) body.style.overflowY = "auto";
+                window.removeEventListener("wheel", handleHorizontalScroll);
+            }
+        });
+    }, {
+        threshold: 0.7
     });
-    // Add active and direction class to the first visible item
-    if (direction === "next") {
-        items[0].classList.add("active", "come-from-right");
-        items[items.length - 1].classList.add("come-from-right-prev");
-    } else if (direction === "prev") {
-        items[0].classList.add("active", "come-from-left");
-        items[1].classList.add("come-from-left-prev");
-    } else items[0].classList.add("active");
-    updateTracker();
-}
-function updateTracker() {
-    const percentage = (currentIndex + 1) / totalItems * 100; // Calculate the percentage
-    tracker.style.width = `${percentage}%`;
-}
-function next() {
-    currentIndex = (currentIndex + 1) % totalItems;
-    const firstItem = items.shift(); // Remove the first item from the array
-    items.push(firstItem); // Add it to the end of the array
-    // Reorder the DOM elements to match the array order
-    items.forEach((item)=>{
-        carousel.appendChild(item);
-    });
-    updateCarousel("next"); // Update the active class with direction
-}
-function prev() {
-    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-    const lastItem = items.pop(); // Remove the last item from the array
-    items.unshift(lastItem); // Add it to the beginning of the array
-    // Reorder the DOM elements to match the array order
-    items.forEach((item)=>{
-        carousel.appendChild(item);
-    });
-    updateCarousel("prev"); // Update the active class with direction
-}
-prevButton.addEventListener("click", prev);
-nextButton.addEventListener("click", next);
-// Initial setup
-updateCarousel();
-// Touch event handlers
-carousel.addEventListener("touchstart", handleTouchStart, false);
-carousel.addEventListener("touchmove", handleTouchMove, false);
-carousel.addEventListener("touchend", handleTouchEnd, false);
-function handleTouchStart(event) {
-    startX = event.touches[0].clientX;
-}
-function handleTouchMove(event) {
-    endX = event.touches[0].clientX;
-}
-function handleTouchEnd() {
-    const deltaX = startX - endX;
-    if (Math.abs(deltaX) > 50) {
-        if (deltaX > 0) next();
-        else prev();
+    observer.observe(solutionsSection);
+    function handleHorizontalScroll(event) {
+        if (!isScrollingHorizontally || event.deltaY === 0) return;
+        const scrollLeftMax = solutionsSection.scrollWidth - solutionsSection.clientWidth;
+        const scrollLeftCurrent = solutionsSection.scrollLeft;
+        const scrollAmount = event.deltaY * horizontalSpeedFactor;
+        if (event.deltaY > 0) {
+            // Scrolling down/right
+            if (scrollLeftCurrent < scrollLeftMax) {
+                event.preventDefault();
+                horizontalOffset += scrollAmount;
+            } else {
+                // Allow vertical scroll after reaching the end
+                body.style.overflowY = "auto";
+                isScrollingHorizontally = false;
+                window.removeEventListener("wheel", handleHorizontalScroll);
+            }
+        } else // Scrolling up/left
+        if (scrollLeftCurrent > 0) {
+            event.preventDefault();
+            horizontalOffset += scrollAmount;
+        } else {
+            // Allow vertical scroll after reaching the start
+            body.style.overflowY = "auto";
+            isScrollingHorizontally = false;
+            window.removeEventListener("wheel", handleHorizontalScroll);
+        }
     }
-}
-// Mouse event handlers for desktop
-carousel.addEventListener("mousedown", handleMouseDown, false);
-carousel.addEventListener("mousemove", handleMouseMove, false);
-carousel.addEventListener("mouseup", handleMouseUp, false);
-carousel.addEventListener("mouseleave", handleMouseLeave, false);
-function handleMouseDown(event) {
-    isDragging = true;
-    startX = event.clientX;
-}
-function handleMouseMove(event) {
-    if (isDragging) endX = event.clientX;
-}
-function handleMouseUp() {
-    if (isDragging) handleDragEnd();
-}
-function handleMouseLeave() {
-    if (isDragging) handleDragEnd();
-}
-function handleDragEnd() {
-    isDragging = false;
-    const deltaX = startX - endX;
-    if (Math.abs(deltaX) > 50) {
-        if (deltaX > 0) next();
-        else prev();
+    function smoothHorizontalScroll() {
+        solutionsSection.scrollLeft += (horizontalOffset - solutionsSection.scrollLeft) * 0.05; // Increase smoothness
+        requestAnimationFrame(smoothHorizontalScroll);
     }
-}
-withAnimations.addEventListener("click", (e)=>{
-    e.preventDefault();
-    if (withAnimations.textContent === "with animations") withAnimations.textContent = "without animtions";
-    else withAnimations.textContent = "with animations";
-    carousel.classList.toggle("animated");
+    const scrollWrap = document.getElementsByClassName("smooth-scroll-wrapper")[0];
+    const height = scrollWrap.getBoundingClientRect().height - 1;
+    const speed = 0.01;
+    let offset = 0;
+    body.style.height = Math.floor(height) + "px";
+    function smoothScroll() {
+        let lastYOffset = 0;
+        if (!isScrollingHorizontally) {
+            offset += (window.scrollY - offset) * speed;
+            const scroll = "translateY(-" + offset + "px) translateZ(0)";
+            scrollWrap.style.transform = scroll;
+        } else lastYOffset = window.scrollY;
+        requestAnimationFrame(smoothScroll);
+    }
+    smoothScroll();
+    smoothHorizontalScroll();
 });
 
 //# sourceMappingURL=index.8e962d96.js.map
