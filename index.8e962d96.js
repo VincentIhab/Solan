@@ -24,11 +24,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     passive: false
                 });
             } else {
-                if (enteringFromBottom && solutionsSection.scrollLeft === 0) {
-                    // Allow vertical scroll after reaching the start when entering from the bottom
-                    body.style.overflowY = "auto";
-                    isScrollingHorizontally = false;
-                } else if (!enteringFromBottom) body.style.overflowY = "auto";
+                body.style.overflowY = "auto";
+                isScrollingHorizontally = false;
                 window.removeEventListener("wheel", handleHorizontalScroll);
             }
         });
@@ -64,7 +61,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     }
     function smoothHorizontalScroll() {
-        solutionsSection.scrollLeft += (horizontalOffset - solutionsSection.scrollLeft) * 0.05; // Increase smoothness
+        solutionsSection.scrollLeft += (horizontalOffset - solutionsSection.scrollLeft) * 0.11; // Increase smoothness
         requestAnimationFrame(smoothHorizontalScroll);
     }
     const scrollWrap = document.getElementsByClassName("smooth-scroll-wrapper")[0];
@@ -73,12 +70,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let offset = 0;
     body.style.height = Math.floor(height) + "px";
     function smoothScroll() {
-        let lastYOffset = 0;
         if (!isScrollingHorizontally) {
             offset += (window.scrollY - offset) * speed;
             const scroll = "translateY(-" + offset + "px) translateZ(0)";
             scrollWrap.style.transform = scroll;
-        } else lastYOffset = window.scrollY;
+        }
         requestAnimationFrame(smoothScroll);
     }
     smoothScroll();
