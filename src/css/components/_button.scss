@@ -9,27 +9,26 @@
   height: 4rem;
   border-radius: var(--radius);
   transition: border 0.2s ease-in, color 0.2s ease-out,
-    background-color 0.3s ease-out, transform 0.3s ease-in-out,
-    box-shadow 0.4s ease;
+  background-color 0.3s ease-out, transform 0.3s ease-in-out,
+  box-shadow 0.4s ease;
   cursor: pointer;
 
   &__text,
   &:link,
   &:visited {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: currentColor;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     @include respond(phone) {
-      font-size: 1.3rem;
+      font-size: 1rem;
+      font-weight: 800;
     }
   }
   &:hover,
   &:active {
-    transform: translateY(-2px);
 
     &::after {
-      transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;
     }
   }
@@ -37,6 +36,7 @@
   &:focus {
     outline: none;
     transform: translateY(2px);
+
     box-shadow: 0 0.5rem 1rem var(--shadow-white);
   }
 }
@@ -53,28 +53,31 @@
 }
 
 .btn-dark {
-  border: 2px solid var(--color-primary-2);
-  color: var(--color-primary-2);
-  background-color: transparent;
+  border: 2px solid transparent;
+  color:var(--color-primary-2)  !important;
+  background-color: var(--color-dark-2);
   &:hover,
   &:active {
-    border: 2px solid var(--color-primary-2);
-    color: var(--color-primary);
-    background-color: var(--color-primary-2);
+    border: 2px solid var(--color-dark);
+    background-color: var(--color-dark) ;
   }
+}
+
+.btn--wide {
+  width: 20rem !important;
 }
 
 .btn--white {
   border: 2px solid var(--color-primary-2);
   color: var(--color-primary);
   background-color: var(--color-primary-2);
-  width: 20rem !important;
   @include respond(phone) {
-    width: 17rem !important;
+    max-width: 13rem;
+    padding:0 0rem;
   }
   &:hover,
   &:active {
-    opacity:.7
+    opacity:.8
   }
 }
 
@@ -82,7 +85,70 @@
   text-transform: uppercase;
   color: var(--color-primary-2);
   text-decoration: none;
-  @include respond(phone) {
-    font-size: 1.4rem;
+  
+}
+
+
+
+
+
+.btn-darkin {
+  border: 2px solid var(--color-primary);
+  color:var(--color-primary)  !important;
+  background-color: transparent;
+  &:hover,
+  &:active {
+    border: 2px solid var(--color-primary);
+    color:var(--color-primary-2)  !important;
+    background-color: var(--color-primary) ;
+  
   }
+}
+
+#btn-mobile  {
+  max-width: 10.4rem;
+  padding:0 0.8rem;
+
+}
+#btn-mobile .btn__text {
+  font-size: 1.1rem ;
+  font-weight: 700;
+
+}
+
+
+.btn-light {
+  border: 2px solid var(--color-primary-2);
+  color:var(--color-primary-2)  !important;
+  background-color: transparent;
+  transition: all .1s;
+  &:hover,
+  &:active {
+    border: 2px solid var(--color-primary-2);
+    color:var(--color-primary)  !important;
+    background-color: var(--color-primary-2) ;
+  
+  }
+}
+
+
+.explore-btn {
+  font-size: 2.2rem;
+  background-color: transparent;
+  border: 2px solid #27343dda;
+  color: var(--color-primary);
+  padding: 1.2rem 3.5rem;
+  background-color:transparent ;
+  border-radius: 30px;
+  transition: all .3s;
+  width: max-content;
+  cursor: pointer;
+  &:hover {
+    color: #000;
+    color: #F7F7F7;
+    background: linear-gradient(360deg, #27343d 21%, rgba(0, 0, 0, 0.848) 100%);
+    transform: translate(0,1px);
+
+  }
+
 }

@@ -6,61 +6,165 @@
     <title>Solan | Security Cameras</title>
     <link rel="icon" type="image/x-icon" href="./Images/Group 1.svg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-      />
-      <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-
-    <script defer type="module" src="./js/dom.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js"></script>
+      
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+      
+    <script defer src="./js/dom.js"></script>
+    <script defer src="./js/solutions.js"></script>
+    <script defer src="./js/workProcess.js"></script>
+    <script defer src="./js/form.js"></script>
 
   </head>
-  <body>
+  <body id="main-scrollbar">
+
+    <!-- spinner element -->
     <div class="spinner-container" id="spinner-container">
-      <!-- spinner element -->
-      <video id="spinner-video" class="spinner-video" muted autoplay loop>
-        <source src="./Images/aaa (1) (1).webm" type="video/mp4">
+      <video id="spinner-video" class="spinner-video" muted autoplay loop playsinline>
+        <source src="./Images/spin.mp4" type="video/mp4">
       </video>
-      
-      <h3 class="loading-text">Loading <span class="loading-t"></span></h3>
-
+      <div id="loading-bar-container">
+        <div id="loading-bar">&nbsp;</div>
+      </div>
     </div>
-<!-- fallback-image -->
-<div class="image-container" id="image-container" style="display:none;">
-  <img src="./Images/Group 20.svg" alt="Fallback Image">
-</div>
 
-    <div class="shadow"></div>
-    <nav id="navbar" class="navigation target">
-      <input type="checkbox" class="navigation__checkbox" id="navi-toggle" />
+    
 
-      <label for="navi-toggle" class="navigation__button_mobile">
-        <span class="navigation__icon">&nbsp;</span>
-      </label>
+    <div id="overlay"></div>
 
-      <div class="navigation__background">&nbsp;</div>
+    <nav id="navbar" class="navigation target" data-threshold="0.1" data-class="animate">
+
 
       <div class="navigation__logo-container">
         <img class="navigation__logo" src="./Images/Group 1.svg" alt="" />
-        <img class="navigation__logo-text" src="./Images/Union 1.svg" alt="" />
       </div>
 
       <div class="navigation__nav">
         <ul class="navigation__links navigation__list">
-          <li>
+          <li class="navigation__item">
             <a class="navigation__link navigation__link__active" href=""
               >Home</a
             >
           </li>
-          <li class="navigation__item">
-            <a class="navigation__link" href="">Products</a>
+          <li class="navigation__item Solutions exclude-overlay">
+            <a class="navigation__link Solutions-link" href="">Solutions</a>
+              <span class="Solutions-link-arrow"><svg class="Solutions-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg></span> <!-- Arrow pointing down -->
+            <ul class="dropdown-menu">
+              <li class="dropdown--item" data-type="Building">
+                
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25.817" height="30.282" viewBox="0 0 25.817 30.282">
+                    <g id="government-building" transform="translate(-2.997 -0.996)">
+                      <path id="Path_1196" data-name="Path 1196" d="M8,14v10.42" transform="translate(1.953 5.858)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1198" data-name="Path 1198" d="M16,14v10.42" transform="translate(5.858 5.858)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1199" data-name="Path 1199" d="M25.812,21H2" transform="translate(2.001 9.275)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1200" data-name="Path 1200" d="M12,9.439V2.74A.744.744,0,0,1,12.744,2H17.21a.744.744,0,0,1,.744.744V4.851a.744.744,0,0,1-.744.744H12" transform="translate(3.905)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1201" data-name="Path 1201" d="M8,11.464V9.1A1.488,1.488,0,0,1,8.434,8.05l.616-.616A1.488,1.488,0,0,1,10.1,7h7.7a1.489,1.489,0,0,1,1.052.436l.616.616A1.488,1.488,0,0,1,19.907,9.1v2.361" transform="translate(1.953 2.441)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1202" data-name="Path 1202" d="M4,14H27.813" transform="translate(0 5.858)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1203" data-name="Path 1203" d="M27.813,26.373V12.1a1.488,1.488,0,0,0-.436-1.052l-.616-.616A1.488,1.488,0,0,0,25.709,10H6.1a1.488,1.488,0,0,0-1.052.436l-.616.616A1.488,1.488,0,0,0,4,12.1V26.373" transform="translate(0 3.905)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>                
+                </div>
+                <a href="#">Building</a>
+              </li>
+              <li class="dropdown--item" data-type="Retail">
+                <div class="dropdown-menu-side">
+                  <h1>quick overview</h1>
+                </div>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25.816" height="24.493" viewBox="0 0 25.816 24.493">
+                    <g id="store" transform="translate(-1.996 -2.997)">
+                      <path id="Path_1334" data-name="Path 1334" d="M8.224,9.749a2.977,2.977,0,0,1-2.977,2.977" transform="translate(0.726 1.856)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1335" data-name="Path 1335" d="M13.452,9.749a2.977,2.977,0,1,1-5.954,0" transform="translate(1.452 1.856)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1336" data-name="Path 1336" d="M17.954,9.749a2.977,2.977,0,0,1-5.954,0" transform="translate(2.904 1.856)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1337" data-name="Path 1337" d="M19.479,12.726A2.977,2.977,0,0,1,16.5,9.749" transform="translate(4.357 1.856)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1338" data-name="Path 1338" d="M20,11.621V24.03" transform="translate(5.486 2.459)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1339" data-name="Path 1339" d="M23.165,21H2" transform="translate(2.324 5.486)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1340" data-name="Path 1340" d="M4,11.619V24.031" transform="translate(0.323 2.459)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1341" data-name="Path 1341" d="M7,22.94V15.663A.662.662,0,0,1,7.659,15h3.308a.662.662,0,0,1,.662.662V22.94" transform="translate(5.591 3.55)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1342" data-name="Path 1342" d="M7.5,9.991V9" transform="translate(1.452 1.614)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1343" data-name="Path 1343" d="M12,9.991V9" transform="translate(2.904 1.614)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1344" data-name="Path 1344" d="M16.5,9.991V9" transform="translate(4.357 1.614)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1346" data-name="Path 1346" d="M23.836,14.582h0A2.977,2.977,0,0,0,26.813,11.6v-.168a2.97,2.97,0,0,0-.425-1.531L23.609,5.281A2.646,2.646,0,0,0,21.345,4H8.463A2.646,2.646,0,0,0,6.194,5.281L3.416,9.906A2.969,2.969,0,0,0,3,11.437V11.6a2.977,2.977,0,0,0,2.977,2.977h0" transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>                
+                </div>
+                <a href="#">Retail</a>
+              </li>
+              <li class="dropdown--item" data-type="Oil">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25.816" height="25.816" viewBox="0 0 25.816 25.816">
+                    <g id="Gas_station" data-name="Gas station" transform="translate(-2.5 -2)">
+                      <path id="Path_1356" data-name="Path 1356" d="M6.5,7h7.939v5.293H6.5Z" transform="translate(0.969 1.293)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+                      <path id="Path_1357" data-name="Path 1357" d="M7.5,15h5.293" transform="translate(1.293 3.878)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1358" data-name="Path 1358" d="M3.5,26.816V5.646A2.646,2.646,0,0,1,6.146,3H16.731a2.646,2.646,0,0,1,2.646,2.646v21.17" transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1359" data-name="Path 1359" d="M20.793,5l1.871,1.871a2.647,2.647,0,0,1,.775,1.871v12.8a1.985,1.985,0,0,1-1.985,1.985h0a1.985,1.985,0,0,1-1.985-1.985V19.554a1.324,1.324,0,0,0-1.323-1.323H15.5" transform="translate(3.878 0.646)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1360" data-name="Path 1360" d="M22.426,13.293h-2.47a1.323,1.323,0,0,1-1.313-1.487l.331-2.646A1.322,1.322,0,0,1,20.287,8h2.14" transform="translate(4.89 1.616)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1361" data-name="Path 1361" d="M2.5,21H18.378" transform="translate(1 5.816)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>                
+                </div>
+                <a href="#">Oil & Gas</a>
+              </li>
+
+              <li class="dropdown--item" data-type="Bank">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25.816" height="22.247" viewBox="0 0 25.816 22.247">
+                    <g id="bank-building" transform="translate(-0.996 -2.994)">
+                      <path id="Path_1159" data-name="Path 1159" d="M12.024,7.219a.149.149,0,1,0,.15.149.151.151,0,0,0-.15-.149" transform="translate(1.88 0.613)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1160" data-name="Path 1160" d="M24.493,11.538H3.125a.628.628,0,0,1-.629-.628V8.557a1.191,1.191,0,0,1,.815-1.129l10.1-3.368a1.262,1.262,0,0,1,.8,0l10.1,3.368a1.191,1.191,0,0,1,.815,1.129v2.353a.628.628,0,0,1-.629.628Z" transform="translate(0.095 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+                      <path id="Path_1161" data-name="Path 1161" d="M4,19.462v-9.13" transform="translate(0.381 1.206)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1162" data-name="Path 1162" d="M20,10.332v9.13" transform="translate(3.427 1.206)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1163" data-name="Path 1163" d="M8,10.332v9.13" transform="translate(1.142 1.206)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1165" data-name="Path 1165" d="M16,10.332v9.13" transform="translate(2.666 1.206)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1166" data-name="Path 1166" d="M23.885,18H3.923a1.191,1.191,0,0,0-1.065.658l-.736,1.472A1.184,1.184,0,0,0,2,20.665v.91H25.812v-.91a1.185,1.185,0,0,0-.126-.532l-.736-1.472A1.191,1.191,0,0,0,23.885,18Z" transform="translate(0 2.666)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+                      <path id="Path_1167" data-name="Path 1167" d="M24.811,21H1" transform="translate(1.001 3.237)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>                
+                </div>
+                <a href="#">Bank</a>
+              </li>
+
+              <li class="dropdown--item" data-type="Stores">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25.409" height="26.709" viewBox="0 0 25.409 26.709">
+                    <g id="Bag_Shopping_Square" data-name="Bag, Shopping, Square" transform="translate(-1.999 -1)">
+                      <path id="Path_1389" data-name="Path 1389" d="M22.587,12.9l-.1-4.473A2.6,2.6,0,0,0,19.894,6H6.554A2.6,2.6,0,0,0,3.96,8.428L3.006,22.734A2.6,2.6,0,0,0,5.6,25.507h7.3" transform="translate(0 1.202)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1390" data-name="Path 1390" d="M7.862,7.2V5.9a3.9,3.9,0,0,1,3.9-3.9h0a3.9,3.9,0,0,1,3.9,3.9V7.2" transform="translate(1.461)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_1391" data-name="Path 1391" d="M11.1,12H22.8a1.671,1.671,0,0,1,1.672,1.672v8.361A1.671,1.671,0,0,1,22.8,23.7H11.1a1.672,1.672,0,0,1-1.672-1.672V13.671A1.673,1.673,0,0,1,11.1,12Z" transform="translate(1.931 3.005)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+                      <path id="Path_1392" data-name="Path 1392" d="M12.964,15a2.926,2.926,0,1,0,5.852,0" transform="translate(2.994 3.906)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>                
+                </div>
+                <a href="#">Stores & Mall</a>
+              </li>
+              <li class="dropdown--item" data-type="Highway">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28.025" height="26.897" viewBox="0 0 28.025 26.897">
+                    <g id="direction-arrow-road" transform="translate(-3.809 -1.996)">
+                      <path id="Path_62513" data-name="Path 62513" d="M22.944,28.059,18,5" transform="translate(7.702 -0.354)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_62514" data-name="Path 62514" d="M3,28.059,7.938,5" transform="translate(2 -0.354)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_62515" data-name="Path 62515" d="M12,3V6.291" transform="translate(5.822 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_62516" data-name="Path 62516" d="M12,9v3.295" transform="translate(5.822 3.881)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_62527" data-name="Path 62527" d="M12,9v3.295" transform="translate(5.822 13.764)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>
+                </div>
+                <a href="#">Highway</a>
+              </li>
+            </ul>
           </li>
           <li class="navigation__item">
-            <a class="navigation__link" href="">Services</a>
+            <a class="navigation__link" href="">Products</a>
           </li>
           <li class="navigation__item">
             <a class="navigation__link" href="">About Us</a>
@@ -68,39 +172,63 @@
           <li class="navigation__item">
             <a class="navigation__link" href="">Contact us</a>
           </li>
-          <li class="navigation__button btn btn-dark btn-hover">
-            <a class="btn__text btn__text" href="">Solan Trading</a>
+          <li id="btn-desk" class="nav-btn navigation__button btn btn-light ">
+            <a class="btn__text" href="">Solan Trading</a>
           </li>
         </ul>
       </div>
-    </nav>
-    <header class="header_contianer">
-      <div class="bg-video" id="video-container" style="display:none;">
-        <video id="background-video" class="bg-video__content" autoplay loop muted>
-          <source
-            src="./Images/video.mp4"
-            type="video/mp4"
-          />
-          Your browser is not supported!
-        </video>
-      </div>
+      <button id="btn-mobile" class="nav-btn btn btn-darkin ">
+        <span class="btn__text" href="">Solan Trading</span>
+      </button>
       
+    </nav>
+    <nav class="phone-nav">
+      <ul class="phone-nav_con">
 
-      <figure class="header">
+        <li class="phone-nav_item">
+          <img class="phone-nav_item--icon" src="./Images/icons/home-house-line.svg" alt="icon">
+          <h6 class="phone-nav_item--title phone-nav_item--title--active">Home</h6>
+        </li>
+        <li class="phone-nav_item">
+          <img class="phone-nav_item--icon phone-nav_item--icon-lamp" src="./Images/icons/lamp-2-light.svg" alt="icon">
+          <h6 class="phone-nav_item--title">Solutions</h6>
+        </li>
+        <li class="phone-nav_item">
+          <img class="phone-nav_item--icon" src="./Images/icons/shopping-bag_2.svg" alt="icon">
+          <h6 class="phone-nav_item--title">Products</h6>
+        </li>
+        <li class="phone-nav_item">
+          <img class="phone-nav_item--icon" src="./Images/icons/email-mail-letter.svg" alt="icon">
+          <h6 class="phone-nav_item--title">Contact</h6>
+        </li>
+      </ul>
+    </nav>
+    <div class="smooth-scroll-wrapper">
+      <div class="content">
+  
+    <header id="header_container" class="header_contianer">
+      <div class="shadow">&nbsp;</div>
+
+      <figure id="header" class="header">
+        <div id="video-container" style="display:none;">
+          <video id="background-video" autoplay loop muted playsinline></video>
+        </div>
+        <div>
         <div class="header__spans">
           <span class="header__spans--Solan">Solan</span>
           <span class="header__spans--Est">Est.</span>
         </div>
         <h1 class="header__title">
-          Solan <span>for<br /></span> Communication <br /><span>And</span>
+          Solan for<br /> Communication <br />And
           Technology.
         </h1>
         <p class="header__paragraph">
           Solan is a Saudi Arabian security and communications integrator. We
           have been in existence since 2004.
         </p>
+      </div>
         <div class="header__buttons">
-          <button class="btn btn--white">
+          <button class="btn btn--white btn--wide">
             <span class="btn__text">Explore products</span>
           </button>
           <a class="header__buttons__text btn--link" href=""
@@ -110,13 +238,321 @@
           >
         </div>
       </figure>
-    </header>
+    </header> 
 
-    <div class="container">
-      <div class="box1">1</div>
-      <div class="box2">2</div>
-      <div class="box3">3</div>
-      <div class="box4">4</div>
+    <section class="about-us">
+      <div class="about-us__content">
+        <h2>First</h2>
+        <h2>20 Years Of Experience</h2>
+        <p>Empower your security strategies with our 
+          20+ years of expertise in Egypt,GCC markets, 
+          and the Middle East. From project inception 
+            to success.</p>
+          </div>
+          <div class="about-us__img">
+            <img src="./Images/eeeeeeee3000-m8PoafWkyt.jpg" alt="">
+          </div>
+    </section>
+    <section class="about-us">
+          <div class="about-us__img">
+          <img src="./Images/pexels-possessed-photography-145486498-11028886.png" alt="">
+        </div>
+        <div class="about-us__content about-us__content__right">
+          <h2>First</h2>
+          <h2>20 Years Of Experience</h2>
+          <p>Empower your security strategies with our 
+            20+ years of expertise in Egypt,GCC markets, 
+            and the Middle East. From project inception 
+            to success.</p>
+        </div>
+    </section>
+    
+    <div class="solutions-section" id="solutions-section">
+      <div class="solutions-section__con">
+
+        <div class="container-item--intro" data-index="1">
+            <h1>Solutions <span>6</span></h1>
+            <p>Our talented team develop creative solutions and built from scratch security systyms nothing can get throw.</p>
+            <a class="container-item--intro-btn explore-btn">Expolre Solutions</a>
+        </div>
+
+        <div class="container-item" data-index="2">
+            <img src="./Images/front-view-modern-skyscrapers-office-buildings.jpg" alt="Image 1">
+            <div>
+              <h3>Building</h3>
+              <button href="">House</button>
+              <button href="">Towers</button>
+              <button href="">privte properties</button>
+            </div>
+        </div>
+
+        <div class="container-item" data-index="3">
+            <img src="./Images/dl.beatsnoop.com-final-c85AtH0gXz.jpg" alt="Image 1">
+            <div>
+              <h3>Stores & Mall</h3>
+              <button href="">open market</button>
+              <button href="">integrated mall</button>
+              <button href="">regional & Super regional malls</button>
+            </div>
+        </div>
+
+        <div class="container-item" data-index="4">
+            <img src="./Images/[fetchpik.com]-high-ariZEgod46.jpg" alt="Image 1">
+            <div>
+              <h3>Retail</h3>
+              <button href="">Supermarkets</button>
+              <button href="">Specialty stores</button>
+              <button href="">Department stores</button>
+            </div>
+        </div>
+        <div class="container-item" data-index="5">
+            <img src="./Images/dl.beatsnoop.com-high-94c84a5abe7405ec19.jpg" alt="Image 1">
+            <div>
+              <h3>Oil & Gas</h3>
+              <button href="">Transportation and storage</button>
+              <button href="">Gas station</button>
+              <button href="">Upstream</button>
+            </div>
+        </div>
+        <div class="container-item" data-index="6">
+            <img src="./Images/dl.beatsnoop.com-final-EJe56s1Rih.jpg" alt="Image 1">
+            <div>
+              <h3>Highway</h3>
+              <button href="">State Highways</button>
+              <button href="">Neighborhood streets</button>
+              <button href="">Village Roads</button>
+            </div>
+        </div>
+        <div class="container-item" data-index="7">
+          <img src="./Images/dl.beatsnoop.com-final-WSfy1CRGtg.jpg" alt="Image 1">
+            <div>
+              <h3>Bank</h3>
+              <button href="">Central</button>
+              <button href="">Cooperative</button>
+              <button href="">Cooperative</button>
+              <button href="">Specialized</button>
+            </div>
+        </div>
+        <div class="container-item--intro container-item--outro" data-index="8">
+            <h1>View More</h1>
+            <a href="" class="explore-btn">Solutions</a>
+        </div>
+      </div>
+  </div>
+
+
+
+  <div class="classes_section">
+    <p class="classes_section--title">New and Unlimited Classes exclusive to <span>Equinox.</span></p>
+    <div class="classes_section--con">
+      <div class="classes_section__class classes_section__class--active">
+        <h2>Signature Classes</h2>
+        <p>New and Unlimited Classes exclusive to Equinox. Designed for the individual. Powered by the collective.</p>
+        <a href="">Explore class</a>
+        <a href="">Book Now</a>
+      </div>
+  
+      <div class="classes_section__class">
+        <h2>Personal Training</h2>
+        <p>Precision-backed 1:1 Personal Training with EFTI-certified COACHES, dedicated to maximizing your potential.</p>
+        <a href="">Explore class</a>
+        <a href="">Book Now</a>
+      </div>
+  
+      <div class="classes_section__class">
+        <h2>Authentic Pilates</h2>
+        <p>Studio Pilates sessions with 1:1 instruction. Tone your core and activate your mind-body connection.</p>
+        <a href="">Explore class</a>
+        <a href="">Book Now</a>
+      </div>
+  
+      <div class="classes_section__more-classes">
+        <a href="">Explore more</a>
+      </div>
     </div>
+  </div>
+
+
+
+    <div id="section3">
+      <div class="dec products-dec">
+        <h1>Products</h1>
+        <p>With latest technologies in the industry We've best security products and systems in the market </p>
+      </div>
+      <div class="container spacer" id="container">
+        <div class="box1 target" data-threshold="0.8" data-class="animate-box1">
+          <span class="arr container-rarr"></span>
+          <h2 class="container__title box1__title">IP cameras</h2>
+          <div class="feature-box-video-container">
+            <video id="feature-box" width="640" height="360" loop muted>
+              <source src="./Images/page-2-box-video-vs--2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <a class="product-btn" href="">Explore product</a>
+        </div>
+        <div class="box2 target" data-threshold="0.5" data-class="animate-box2">
+          <h2 class="container__title">PIR Systems</h2>
+          <a class="product-btn" href="">Explore product</a>
+        </div>
+        <div class="box3 target" data-threshold="0.5" data-class="animate-box3">
+          <h2 class="container__title sm-title">NVR Systems</h2>
+          <img src="./Images/fusion_nvr_front.jpg" alt="NVR-Systems">
+          <a class="product-btn" href="">Explore product</a>
+  
+        </div>
+        <div class="box4 target" data-threshold="0.5" data-class="animate-box4">
+          <h2 class="container__title sm-title">DVR Systems</h2>
+          <img src="./Images/D881-L1.png" alt="DVR-ystems">
+          <a class="product-btn" href="">Explore product</a>
+  
+        </div>
+        <div id="navVideo_show-on-section-2" class="video-hidden">
+          <video id="navVideo" autoplay loop muted playsinline></video>
+        </div>
+      </div>
+        <div class="ex-products-btn" >
+          <a href="" class="explore-btn">View more</a>
+        </div>
+  
+    </div>  
+    <section id="work-process" class="work-process">
+      <div class="work-process__title_con">
+        <h2  id="animatedText" class="work-process__title_con__title">Our Work Process</h2>
+        
+      </div>
+
+      <div class="work-process__container">
+
+        <div class="st1">
+          <div class="work-process__step" id="step1">
+            <h3>Needs assessment</h3>
+          </div>
+          <p class="work-process__decription work-process__decription--left">Understand the client needs</p>
+          <p class="work-process__decription work-process__decription--right">And act on it.</p>
+          <div class="work-process__step-line">
+            <div class="work-process__line line" data-color-start="#fd0000" data-color-end="#00ff00" id="line1"></div>
+          </div>
+        </div>
+        
+       <div class="st2">
+        <div class="work-process__step" id="step2">
+          <h3>Solution</h3>
+        </div>
+        <p class="work-process__decription work-process__decription--left">Came up with the best</p>
+        <p class="work-process__decription work-process__decription--right">plans and solutions.</p>
+        <div class="work-process__step-line">
+          <div class="work-process__line line"  data-color-start="#fd0000" data-color-end="#00ff00" id="line2"></div>
+        </div>
+      </div>
+
+      <div class="st3">
+        <div class="work-process__step" id="step3">
+          <h3>Get it done</h3>
+        </div>
+        <p class="work-process__decription work-process__decription--left">Executing work</p>
+        <p class="work-process__decription work-process__decription--right">with highest quality on time.</p>
+        <div class="work-process__step-line">
+          <div class="work-process__line line" data-color-start="#00ff00" data-color-end="#a1a1a1" id="line3"></div>
+        </div>
+      </div>
+        
+      <div class="st4">
+        <div class="work-process__step" id="step4">
+          <h2>Full support</h3>
+          <h5 class="work-process__customers">Our customers enjoy the best protection products, services and offers, and have ongoing support for any possible renewals, improvements and maintenance.</h5>
+        </div>
+      </div>
+      </div>
+      <div class="work-process__background">
+        <img src="./Images/Advantages-Of-An-Office-Security-System-Control-Room-Monitoring-Cape-Town-Nzacksi-Security-1024x682.jpg" alt="">
+      </div>
+    </section>
+
+
+    <div class="form-page">
+      <div class="form-page__text center">
+        <div class="form-page__text__title">
+            <!-- <span>Contact Us</span> -->
+        </div>
+        <div class="q">
+            <div class="q-title"></div>
+            <div class="q-content-wrapper">
+                <div class="q-content"></div>
+                <div class="cursor"></div>
+            </div>
+        </div>
+      </div>
+      <div class="form-page-container ">
+        <div class="form-container center">
+          <div class="progress-bar">
+            <div class="progress-bar__step progress-bar__step--active" data-step="1"></div>
+            <div class="progress-bar__line"></div>
+            <div class="progress-bar__step" data-step="2"></div>
+            <div class="progress-bar__line"></div>
+            <div class="progress-bar__step" data-step="3"></div>
+            <div class="progress-bar__line"></div>
+            <div class="progress-bar__step" data-step="4"></div>
+          </div>
+          <form id="multiStepForm">
+            <div class="form-step form-step--active" data-step="1">
+              <img src="./Images/icons/form/select-product-svgrepo-com.svg" alt="select-icon">
+              <h2>Select Type</h2>
+              <div class="button-group">
+                <button type="button" class="selection-button" data-value="distributor">Distributor</button>
+                <button type="button" class="selection-button" data-value="entrepreneur">Entrepreneur</button>
+                <button type="button" class="selection-button" data-value="system integrator">System Integrator</button>
+                <button type="button" class="selection-button" data-value="individual">Individual</button>
+              </div>
+            </div>
+            <div class="form-step" data-step="2">
+              <img src="./Images/icons/form/industry-business-construction-engineer-worker-engineering-street-cone-svgrepo-com.svg" alt="business-construction-icon">
+              <h2>Industry</h2>
+              <select id="industry">
+                <option value="manufacturing">Manufacturing</option>
+                <option value="wholesaler">Wholesaler</option>
+                <option value="distribution">Distribution</option>
+                <option value="retail">Retail</option>
+                <option value="information technology">Information Technology</option>
+                <option value="real estate">Real Estate</option>
+                <option value="government">Government</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="food privilege">Food Privilege</option>
+                <option value="hospitality">Hospitality</option>
+                <option value="business & finance">Business & Finance</option>
+              </select>
+            </div>
+            <div class="form-step" data-step="3">
+              <img src="./Images/icons/form/personal-center-svgrepo-com.svg" class="form-page-container__personal-img" alt="personal-icon">
+              <h2>Personal Information</h2>
+              <input type="text" id="firstName" placeholder="First Name" required>
+              <input type="text" id="lastName" placeholder="Last Name" required>
+              <input type="text" id="mobile" placeholder="Mobile" required>
+            </div>
+            <div class="form-step" data-step="4">
+              <img src="./Images/icons/form/company-svgrepo-com.svg" alt="company-icon">
+              <h2>Company Information</h2>
+              <input type="email" id="email" placeholder="Email" required>
+              <input type="text" id="companyName" placeholder="Company Name" required>
+              <input type="text" id="jobTitle" placeholder="Job Title" required>
+            </div>
+  
+            <div class="buttons">
+              <button type="button" class="form-btn back">&#60;  Prev</button>
+              <button type="button" class="form-btn next">Next&#62;</button>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+      
+    </div>
+    <div class="mapAnd_info">
+      <h4 class="mapAnd_info__address"><span>Address</span>Zayd Ibn Al Khattab Al Malaz, Riyadh Kingdom of Saudi Aradia</h4>
+      <div id="map" class="mapAnd_info__map"></div>
+    </div>
+  </div>
+  </div>
+
   </body>
 </html>

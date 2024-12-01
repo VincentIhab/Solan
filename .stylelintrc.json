@@ -1,8 +1,0 @@
-{
-    "extends": "stylelint-config-standard-scss",
-    "rules": {
-      "indentation": 2,
-      "no-empty-source": null
-    }
-  }
-  

@@ -1,32 +1,59 @@
+
 .header_contianer {
   height: fit-content;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start; /* Align content to the right */
   overflow: hidden;
-  margin-left: 10rem;
-  z-index: 1;
-  margin-top: 0rem;
-  z-index: 1;
+  z-index: 2;
+  height: 100vh;
+  max-width: 100%;
+  position: relative;
+  margin: 0;
+  border-radius: 0;
+  // border-radius: var(--radius);
   @include respond(tab-land) {
     align-items: center;
     justify-content: center; /* Align content to the right */
     margin: auto;
   }
+  @include respond(phone) {
+    margin: 0 ;
+
+  }
+  
 }
+
+
 .header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  align-content: flex-start;
-  height: 100vh;
+  margin-left: 13rem;
+
+  height: 100%;
   max-width: 60rem;
   @include respond(tab-land) {
     align-items: center;
     justify-content: center; /* Align content to the right */
     align-content: center;
     max-width: 87.5%;
+    margin-left: 0;
+  }
+  @include respond(tab-port) {
+    position: relative;
+    background-color: transparent;
+    margin-top: -4%;
+    justify-content: space-between;
+    padding: 9rem 0rem 3.2rem 2.8rem;
+    max-width: 89.5%;
+    border-radius: var(--radius);
+    height: 75vh;
+    align-self: center;
+    opacity: 0;
+    animation: FadeIn 1.1s ease-in-out 0s forwards; /* Animation name, duration, easing, delay */
+
   }
 
   &__spans {
@@ -34,28 +61,32 @@
     display: flex;
     align-items: center;
     font-size: 1.2rem;
+    
 
     @include respond(tab-land) {
       margin-right: auto;
       padding-bottom: 1.2rem;
     }
     &--Solan {
-      border-radius: var(--radius-2);
+      border-radius: 7px;
       padding: 0.6rem 1.1rem;
       color: var(--color-primary-2);
       text-transform: uppercase;
       align-self: center;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 1.5px;
       background-color: rgba(117, 117, 117, 0.945);
       margin-right: 1.2rem;
       @include respond(tab-land) {
         background-color: var(--color-gray);
         color: var(--color-primary);
-        font-weight: 900;
       }
       @include respond(phone) {
-        font-size: 1.3rem;
+        padding: 0.4rem 1.1rem;
+        font-size: 1.2rem;
+        background-color: #535C62;
+        color: var(--color-primary-2);
+
       }
     }
     &--Est {
@@ -65,19 +96,21 @@
       @include respond(tab-land) {
         color: var(--color-gray);
         font-size: 1.3rem;
-        font-weight: 900;
+        font-weight: 700;
       }
       @include respond(phone) {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
     }
   }
   &__title {
     font-size: 6.4rem;
-    font-weight: 900;
+    font-weight: 700;
     letter-spacing: 1.7px;
-    line-height: 1.3;
+    line-height: 1.2;
     color: var(--color-primary-2);
+    padding-right:  2.8rem ;
+    margin: 2rem 0 ;
     @include respond(mid-desktop) {
       font-size: 6rem;
     }
@@ -85,28 +118,39 @@
       margin-right: auto;
     }
     @include respond(phone) {
-      font-size: 4rem;
+      margin-top: -0.5rem;
+      font-size: 3.8rem;
+      line-height: 1.3;
+      margin-bottom: 0rem ;
+    }
+    @include respond(smallphone) {
+      font-size: 3rem;
     }
     span {
       font-weight: 300 !important;
     }
   }
   &__paragraph {
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: var(--color-gray);
-    margin: 2.2rem 0 6rem;
+    margin: 1.8rem 0 6rem;
+    padding-right:  2.8rem ;
     font-weight: 400;
-    @include respond(mid-desktop) {
-      margin: 2.2rem 0 5rem;
-    }
+    width: 100%;
     @include respond(tab-land) {
       margin: 2.5rem auto 6rem 0;
-      width: 75%;
+      width: 80%;
       color: var(--color-gray-2);
     }
     @include respond(phone) {
       font-size: 1.7rem;
-      width: 100%;
+      line-height: 2;
+      font-weight: 300;
+      margin-top: 1.8rem;
+      width: 95%;
+    }
+    @include respond(smallphone) {
+      font-size: 1.5rem;
     }
   }
   &__buttons {
@@ -138,12 +182,15 @@
         margin-right: 1rem;
         transition: margin-right 0.6s ease-out;
         @include respond(phone) {
-          font-size: 1.5rem;
+          font-weight: 600;
+          font-size: 1rem;
         }
       }
 
       &_arrow {
         font-size: 2.1rem;
+        position: relative;
+        bottom: 3px;
       }
 
       &::after {
@@ -177,3 +224,9 @@
 #target {
   opacity: 0;
 }
+
+.mobileBtnArrrow {
+  display: none;
+}
+
+

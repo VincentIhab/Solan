@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.816" height="25.816" viewBox="0 0 25.816 25.816">
+  <g id="Gas_station" data-name="Gas station" transform="translate(-2.5 -2)">
+    <path id="Path_1356" data-name="Path 1356" d="M6.5,7h7.939v5.293H6.5Z" transform="translate(0.969 1.293)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+    <path id="Path_1357" data-name="Path 1357" d="M7.5,15h5.293" transform="translate(1.293 3.878)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1358" data-name="Path 1358" d="M3.5,26.816V5.646A2.646,2.646,0,0,1,6.146,3H16.731a2.646,2.646,0,0,1,2.646,2.646v21.17" transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1359" data-name="Path 1359" d="M20.793,5l1.871,1.871a2.647,2.647,0,0,1,.775,1.871v12.8a1.985,1.985,0,0,1-1.985,1.985h0a1.985,1.985,0,0,1-1.985-1.985V19.554a1.324,1.324,0,0,0-1.323-1.323H15.5" transform="translate(3.878 0.646)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1360" data-name="Path 1360" d="M22.426,13.293h-2.47a1.323,1.323,0,0,1-1.313-1.487l.331-2.646A1.322,1.322,0,0,1,20.287,8h2.14" transform="translate(4.89 1.616)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1361" data-name="Path 1361" d="M2.5,21H18.378" transform="translate(1 5.816)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

@@ -1,51 +1,331 @@
+#navVideo_show-on-section-2 {
+  transition: transform 1s ease;
+  transform: translateY(100%); 
+  position: absolute;
+  top: 6rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  z-index: -1;
+  width: 20rem;
+
+}
+#navVideo {
+  width: 100%;
+}
+
+.visible {
+  transform: translateY(0); /* Bring into view */
+}
+
+.hidden {
+  transform: translateY(100%); 
+}
+
 .container {
   display: grid;
-  padding: 10.1rem 6.1rem;
+  padding: 10.1rem 15rem;
   margin: 0 auto;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
+  width: 100%;
+  gap: 3rem;
+  height: 100%;
+  position: relative;
+  background-color: var(--color-primary-7);
+  
+  &__title {
+    color: var(--color-primary);
+    font-weight: 400;
+  }
+
+
+  .product-btn {
+    padding: 1.6rem;
+    font-size: 1.2rem;
+    color: #000;
+    position: absolute;
+    bottom: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 1rem 10rem #0000001e;
+    border-radius: 25px;
+    left: 3rem;
+    z-index: 100;
+    transition: all .3s;
+    &:hover {
+      background-color:  var(--color-primary);
+      color: #ffffff;
+      transform: translate(0,-3px);
+
+    }
+  }
+
+
+}
+.products-dec {
+  margin: 5rem 15rem 3rem 15rem; 
+  position: relative;
+  top: 7rem;
+
+}
+.dec {
+  display: flex;
+  align-items: center;
+  z-index: 90;
+  line-height: 1.4;
+  h1 {
+    font-size: 6rem;
+    width: 60%;
+    color: var(--color-primary);
+  }
+  p {
+    font-size: 2.5rem;
+    width: 50%;
+    color: #27343d9e;
+  }
+  @include respond(tab-land) {
+      flex-direction: column;
+      h1 {
+        width: 100%;
+      }
+      p {
+        width: 100%;
+      }
+    }
+  @include respond(phone) {
+      margin: 5rem 2.5rem 3rem 2.5rem; 
+      h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 2rem;
+      }
+  }
+}
+.ex-products-btn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: -7.5rem;
+  a {
+    z-index: 150;
+
+  }
+}
+.box1 {
+  grid-area: 1 / 1 / 1   / 3;
+  background-color: #e7e7e7;
+  z-index: 3;
+  transition: background-color 1s ease-in-out;
+
+  &::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+    bottom: 14rem;
+    left: -26rem;
+    z-index: -1;
+    height: 40%;
+    background: rgb(231,231,231);
+    transform: rotate(-45deg);
+    background: linear-gradient(200deg, rgba(231,231,231,1) 50%, rgba(255,255,255,1) 100%);
+    }
+
+}
+.feature-box-video-container {
+  position: absolute;
+  background-color: transparent;
+  z-index: -1;
+  min-width: 75%;
+  right:3.7rem;
+  top: 0 ;
+  height: 100%;
+}
+#feature-box {
   width: 100%;
   height: 100%;
 }
 
-.box1 {
-  grid-area: 1 / 1 / 4 / 3;
-  background-color: rgba(248, 14, 15, 0.5);
-}
 .box2 {
   grid-area: 1 / 3 / 2 / 5;
-  background-color: rgba(154, 153, 122, 0.5);
-}
-.box3 {
-  grid-area: 2/3/3/4;
-  background-color: rgba(129, 207, 243, 0.5);
-}
-.box4 {
-  grid-area: 2/4/3/5;
-  background-color: rgba(153, 199, 51, 0.5);
-}
-
-.box1,
-.box2,
-.box3,
-.box4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
-}
-
-@media (max-width: 768px) {
-  .container {
-    grid-template-areas:
-      "box1"
-      "box2"
-      "box3"
-      "box4"
-      "box5";
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+  .product-btn {
+    background-color: #e7e7e7;
   }
+
+}
+
+.box3 {
+  grid-area: 2/3/3/5;
+  position: relative;
+  .product-btn {
+    background-color: #e7e7e7;
+  }
+  img {
+    transform: translate(-15%, 5%) scale(1.15);
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.9;
+    transition: all  1s ease-in-out;
+
+  }
+
+}
+
+.box4 {
+  background-color: #e7e7e7;
+  grid-area: 2 / 1 / span 2 / span 2;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+    bottom: 14rem;
+    left: -26rem;
+    z-index: -1;
+    height: 40%;
+    background: rgb(231,231,231);
+    transform: rotate(-45deg);
+    background: linear-gradient(200deg, rgba(231,231,231,1) 50%, rgba(255,255,255,1) 100%);
+    }
+
+    img {
+      transform: translate(-11%,0% ) scale(1.1);
+      position: absolute;
+      opacity: 0.9;
+      bottom: -2rem;
+      z-index: -1;
+      transition: all 1s ease-in-out;
+    }
+}
+
+
+
+
+
+
+.box1, .box2, .box3, .box4 {
+  height: 25rem;
+  
+  display: flex;
+  font-size: 2.5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 5rem 3.5rem;
+  opacity: 0;
+  font-weight: 300;
+  line-height: 1.3;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+
+}
+
+.box3, .box4 {
+  padding: 5rem 0 0 3.5rem;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: background 0.5s ease-in-out;
+  position: relative;
+  img {
+    position: absolute;
+    right: 0;
+    width: 50%;
+  }
+}
+/* Animation classes */
+.target.animate-box1 {
+  animation: fadeInBottom 1s forwards;
+}
+
+.target.animate-box2 {
+  animation: fadeInLeft 1s forwards;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      @include productSVG;
+      background-repeat: no-repeat;
+      background-position: 75% 0; 
+      background-size: 300%;
+      transform: scale(1.12);
+      transition: all 2s;
+      animation: backgroundComeFromzoom 1.7s 0.5s forwards;
+    }
+    &:hover::after {
+      transform: translateX(2rem) scale(1.23);
+    }
+}
+
+.target.animate-box3 {
+  background-color: #ffffff;
+
+  animation: fadeInTop 1s 0.5s forwards;
+  &:hover img {
+    transform: scale(1.19);
+  }
+  
+}
+.target.animate-box4 {
+
+  animation: fadeInBottom 1s  forwards;
+
+  &:hover img {
+    transform: scale(1.19);
+  }
+}
+
+
+
+
+
+
+/* Responsive styles */
+@include respond(tab-land) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 10.1rem 15rem;
+  }
+
+
+  .box1, .box2, .box3, .box4 {
+    width: 100%;
+
+  }
+  .feature-box-video-container {
+    max-width: 50%;
+    top: -2.1rem;
+  }
+}
+@include respond(phone) {
+  .container {
+    padding: 10.1rem 2rem;
+  }
+
+  .feature-box-video-container {
+   min-width: 90% !important;
+   right: 0;
+   top: -3.1rem;
+  }
+  .target.animate-box2 {  
+      &::after {
+        top: 5rem;
+        left: 3rem;
+        transform: scale(1.22);
+      }
+  }
+  
 }

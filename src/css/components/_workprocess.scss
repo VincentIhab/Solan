@@ -1,0 +1,191 @@
+.work-process {
+    transition: background-color 1s ease, color 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color:#fff ;
+    backdrop-filter: blur(25px);
+    color: #343434;
+    text-align: center;
+    padding: 20rem 0 25rem 0;
+    opacity: 1;
+    z-index: 100;
+    transform: scale(1);
+    border-radius: var(--radius-2);
+    overflow: hidden;
+    &::before {
+        z-index: 10;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 5%;
+        bottom: 0;
+        background: rgb(255,255,255);
+        background: linear-gradient(360deg, rgba(255,255,255,1) 21%, rgba(14, 14, 15, 0) 100%);
+    }
+
+    &__title_con {
+          text-align: center;
+          color: #000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 70vh;
+          margin-bottom: 20rem;
+          letter-spacing: 1px;
+          line-height:2;
+          transition: opacity 0.5s ease;
+        &__title {
+            color: transparent;
+            font-size: 7rem;
+            font-weight: 300;
+            -moz-background-clip: text;
+            background: -webkit-gradient(
+                linear,
+                left top,
+                right top,
+                from(#9c0000),
+                color-stop( #009700),
+                color-stop(rgb(0, 144, 144)),
+                color-stop(rgb(50, 50, 50)),
+                to(#a1a1a1)
+            );
+            background: -o-linear-gradient(left, #9c0000, #009700, rgb(0, 144, 144), rgb(50, 50, 50), #a1a1a1);
+            background: linear-gradient(to right, #9c0000,  #009700, rgb(0, 144, 144), rgb(50, 50, 50), #a1a1a1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-size: 400% 100%;
+            color: transparent;
+            -webkit-animation: rainbow_animation 6s ease-in-out infinite;
+            animation: rainbow_animation 6s ease-in-out infinite;
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__step-line {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        width: 100vw;
+        
+    }
+
+    &__step {
+        h3 {
+            font-size: 4.1rem;
+            color: inherit;
+            z-index: 20;
+        }
+        h2 {
+            font-size: 3.8rem;
+            font-weight: 600;
+            color: #878787;
+        }
+    }
+
+    &__line {
+        width: 3px;
+        position: relative;
+        height: 0; /* Start at 0 height */
+        align-self: center;
+        transition: height 0.5s ease, background-color 0.5s ease;
+        z-index: -10;
+        &--last-line {
+            height: 25rem;
+            color: #fff;
+        }
+    }
+    
+    &__decription {
+        position: absolute;
+        justify-self: center;
+        font-size: 3rem;
+        text-align: left;
+        width: 33%;
+        word-break: break-all;
+        top: 42.5%;
+        &--left {
+            left: 20%;
+        }
+        &--right {
+            right: 10%;
+            top: 60%;
+        }
+    }
+
+    &__customers {
+        font-size: 2.2rem;
+        font-weight: 400;
+        width: 50%;
+        margin: 20px auto 0 auto;
+        color: #767676;
+    }
+
+    &__background {
+        position: absolute;
+        bottom: 5rem;
+        z-index: -1;
+        opacity: 0;
+        width: 100%;
+        transition: all 0.7s ease-in;
+        img {
+            width: 100%;
+            opacity: 0.1;
+            z-index: 2;
+        }
+        &::before {
+            z-index: 1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+            background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(225,232,235,0) 100%);        }
+        
+    }
+}
+
+.spacer {
+    height: 100vh; /* This will create the trigger zone */
+}
+
+
+.st1, .st2, .st3, .st4 {
+    opacity: 0;
+    transition: opacity 2s ease;
+    transform: translateY(20px);
+    height: 82.5rem ;
+    overflow: hidden;
+
+  }
+
+  .work-process__step-line__decription {
+    white-space: nowrap;
+  }
+
+
+
+
+.st4 {
+
+    height: fit-content ;
+    
+  }
+  
+
+  .work-process__decription--left, .work-process__decription--right {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }

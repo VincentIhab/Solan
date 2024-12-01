@@ -1,25 +1,69 @@
-.bg-video {
+.bg-video--desktop {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   z-index: -1;
+  pointer-events: none;
 
-  &__content {
+  &__content_desk {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(1.7);
+    transform-origin: 80% 0%;
     object-fit: cover;
-    transform: translate(-50%, -50%) scale(1.9);
-    transform-origin: 80% 10%;
     animation: zoomOut 7s ease-in-out 2s forwards;
-    @include respond(phone) {
-      object-position: 70% 10%; 
-    }
+
+
+  }
+}
+
+.bg-video--mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-primary-2);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: var(--radius);
+  
+  &::before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    animation: FadeIn 1.2s ease-in-out 1s forwards; /* Animation name, duration, easing, delay */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='335' height='615' viewBox='0 0 335 615'%3E%3Cdefs%3E%3ClinearGradient id='linear-gradient' x1='1' y1='0.5' x2='0' y2='0.5' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='%2327343d'/%3E%3Cstop offset='1' stop-color='%2327343d' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg id='Group_212' data-name='Group 212' transform='translate(-20 -101)'%3E%3Cpath id='Rectangle_262' data-name='Rectangle 262' d='M0,0H245a20,20,0,0,1,20,20V315a20,20,0,0,1-20,20H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z' transform='translate(20 366) rotate(-90)' fill='%2327343d' opacity='0.996'/%3E%3Crect id='Rectangle_266' data-name='Rectangle 266' width='267' height='335' transform='translate(20 633) rotate(-90)' opacity='0' fill='url(%23linear-gradient)'/%3E%3Cpath id='Rectangle_263' data-name='Rectangle 263' d='M20,0H315a20,20,0,0,1,20,20V430a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z' transform='translate(355 716) rotate(180)' fill='url(%23linear-gradient)'/%3E%3Crect id='Rectangle_267' data-name='Rectangle 267' width='257' height='335' transform='translate(20 622) rotate(-90)' fill='url(%23linear-gradient)'/%3E%3Cpath id='Rectangle_264' data-name='Rectangle 264' d='M20,0H315a20,20,0,0,1,20,20V430a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z' transform='translate(355 716) rotate(180)' opacity='0.499' fill='url(%23linear-gradient)'/%3E%3Crect id='Rectangle_268' data-name='Rectangle 268' width='194' height='335' transform='translate(20 560) rotate(-90)' fill='url(%23linear-gradient)'/%3E%3Cpath id='Rectangle_265' data-name='Rectangle 265' d='M0,0H335a0,0,0,0,1,0,0V410a20,20,0,0,1-20,20H15A15,15,0,0,1,0,415V0A0,0,0,0,1,0,0Z' transform='translate(20 286)' opacity='0.105' fill='url(%23linear-gradient)'/%3E%3C/g%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }      
+    
+  &__content_mobile {
+    position: absolute;
+    top: 42.5%;
+    left: -10rem;
+    opacity: 0;
+    width: 100%;
+    transform: scale(2); /* Scale the video to 120% of its original size */
+    transform-origin: top center; /* Make sure the scaling happens from the center */
+    animation:FadeIn2 1.2s ease-in-out 1.5s forwards;
+    filter: saturate(50%);    object-fit: cover;
+  
+
   }
 }
 

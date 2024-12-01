@@ -1,0 +1,79 @@
+
+.about-us {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10rem;
+    height: 80vh;
+    width: fit-content;
+    margin: 15rem 15rem 5rem 15rem ;
+    @include respond(tab-land) {
+        display: flex;
+        flex-direction: column;
+        flex-flow: column-reverse;
+        margin:11rem 2rem;
+
+    }
+  
+    &__img {
+        height: 100%;
+        width: fit-content;
+        margin: auto 0;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 40px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include respond(tab-land) {
+            padding: 0;    
+        }
+        h2 {
+            font-size: 6rem;
+            line-height: 1.2;
+            font-weight: 450;
+            @include respond(tab-land) {
+                font-size: 5rem;      
+            }
+            &:first-child {
+                position: relative;
+                font-size: 5rem;
+                margin-bottom: 0.6rem;
+                color: #777777;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 9px;
+                    width: 25rem;
+                    height:80%;
+                    left: 3.2rem;
+                    bottom: 0;
+                    top: 0;
+                    background-color: rgba(131, 131, 131, 0.199);
+                    z-index: -1;
+                }
+            }
+        }
+        p {
+            font-size: 2.5rem;
+            margin-top: 3rem;
+            width: 82%;
+            color: #777777;
+            @include respond(tab-land) {
+              font-size: 2rem;
+              margin: 3rem 0 5rem 0;  
+            }
+        }
+
+        &__right {
+            padding-left: 5rem;
+        }
+    }
+}

@@ -8,6 +8,8 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
+  font-family: "Onest", sans-serif;
 
   @include respond(tab-land) {
     // width < 1200?
@@ -35,8 +37,15 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #F8F9FB;
   overflow-x: hidden;
+  font-family: "Onest", sans-serif;
+  overscroll-behavior: none;
+
+  @include respond(tab-land) {
+    margin:  0;
+  }
+
 }
 
 ul {
@@ -46,11 +55,16 @@ ul {
 a {
   text-decoration: none;
 }
+h1, h2, h3,h4,h5,h6,a,p,button,span {
+  font-family: "Onest", sans-serif ;
+}
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-gray);
 }
 ::-webkit-scrollbar {
+    height: 0;              /* height of horizontal scrollbar ← You're missing this */
+
   width: 10px;
 }
 ::-webkit-scrollbar-track {
@@ -66,32 +80,18 @@ a {
 }
 
 
-.image-container {
-  display: none;
+.shadow {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
   height: 100%;
-  background-size: cover;
-  z-index: -1;
-  
-
-  img {
-    transform: scaleX(-1); /* Mirror the image horizontally */
-  
-    @include respond(phone) {
-        transform: scaleX(1); 
-      }
-  }
-}
-
-
-.shadow {
+  background: linear-gradient(to bottom,       rgba(0, 0, 0, 0.506)    , #00000000);
+  pointer-events: none;
   opacity: 0;
+  overflow: hidden;
 
-  animation: FadeIn 1.2s ease-in-out 1s forwards; /* Animation name, duration, easing, delay */
+  animation: FadeIn 1.2s ease-in-out  forwards; /* Animation name, duration, easing, delay */
 
   &::after {
     content: "";
@@ -100,7 +100,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, var(--color-primary-3), #00000000);
+    background: linear-gradient(to top,       rgba(0, 0, 0, 0.5)    , #00000000);
   }
   &::before {
     content: "";
@@ -112,9 +112,14 @@ a {
     background: linear-gradient(
       to right,
       var(--color-primary),
-      var(--color-primary-4),
-      var(--color-primary-3)
+      rgba(0, 0, 0, 0)
     );
+  }
+}
+
+@include respond(phone) {
+  .shadow {
+    display: none;
   }
 }
 
@@ -128,14 +133,15 @@ a {
   width: 100%;
   height: 100%;
   display: flex;
-  z-index: 999;
+  z-index: 9999999;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #e4f1fb; /* Change as needed */
+  background-color: #fff; /* Change as needed */
   transition: opacity 0.5s ease, visibility 0.4s ease;
   opacity: 1;
   visibility: visible;
+  transition: opacity 1s ease-in;
 }
 
 .spinner-container.hidden {
@@ -147,7 +153,6 @@ a {
   width: 12.5rem;
   object-fit: cover;
   position: relative;
-
   &::before {
     content: '';
     background-color: #ff0000;
@@ -156,20 +161,25 @@ a {
   }
 }
 
-.loading-text {
-  font-size: 2.5rem;
-  font-weight: 500;
-  color:var(--color-primary) ;
+
+
+#loading-bar-container {
+  position: absolute;
+  top: 55%;
+  width: 10rem;
+  height: 3px;
+  background-color: white;
 }
 
-.loading-t::after {
-  content: '';
-  animation: dots 3s infinite;
+#loading-bar {
+  height: 100%;
+  border-radius: 50px;
+  width: 0;
+  background-color: var(--color-primary);
+  transition: width 0.1s, background-color 0.1s;
 }
 
-@keyframes dots {
-  0% { content: ''; }
-  25% { content: '.'; }
-  50% { content: '..'; }
-  75% { content: '...'; }
+
+.arr {
+  font-family: "Arial Unicode MS", "Lucida Sans Unicode", sans-serif;
 }
